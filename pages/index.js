@@ -1,6 +1,14 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 export default function Home() {
+	// how to apply styles/classes to <body>
+	useEffect(() => {
+		// document.body.classList.add('min-h-screen');
+		// document.body.classList.add('grid');
+		// document.body.classList.add('place-content-center');
+		// document.body.classList.add('radial-blue');
+	});
 	return (
 		<div>
 			<Head>
@@ -10,7 +18,7 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<h1>hey bitches</h1>
+				<h1>Tailwind ready to go!</h1>
 			</main>
 		</div>
 	);

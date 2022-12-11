@@ -5,6 +5,7 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
+					{/* apply GoogleFonts to entire app */}
 					<link rel='preconnect' href='https://fonts.googleapis.com' />
 					<link
 						rel='preconnect'
