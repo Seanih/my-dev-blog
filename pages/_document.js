@@ -1,11 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
+// APPLY FONTS AND STYLES TO <body> and entire app
 class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
 				<Head>
-					{/* apply GoogleFonts to entire app */}
 					<link rel='preconnect' href='https://fonts.googleapis.com' />
 					<link
 						rel='preconnect'
