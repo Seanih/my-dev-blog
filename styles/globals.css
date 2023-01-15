@@ -2,9 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-bold;
+	}
+
+	h1 {
+		@apply text-3xl;
+	}
+
+	h2 {
+		@apply text-2xl;
+	}
+
+	h3 {
+		@apply text-xl;
+	}
+
+	body {
+		@apply from-black via-cyan-900 to-gray-900;
+	}
+}
+
 html {
 	scroll-behavior: smooth;
 }
+
 * {
 	box-sizing: border-box;
 }
