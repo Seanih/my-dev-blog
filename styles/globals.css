@@ -30,7 +30,7 @@
 
 @layer components {
 	.link {
-		@apply hover:text-blue-700 hover:font-bold hover:scale-105 duration-100 ease-in;
+		@apply hover:underline hover:underline-offset-4 hover:text-sky-700 hover:scale-[1.025] duration-100 ease-in;
 	}
 }
 

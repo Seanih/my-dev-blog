@@ -6,7 +6,7 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Coding Chronicles</title>
+				<title>Coding Chronicles | A New Dev&apos;s Journey</title>
 				<meta
 					name='description'
 					content='a new developer documenting and sharing his experiences'
@@ -15,12 +15,23 @@ export default function Home() {
 			</Head>
 
 			<main className='relative top-20'>
-				<figure className='flex flex-col items-center text-sm'>
-					<Image width={800} src={explosion} alt='nuclear bomb explosion' />
-					<figcaption className='text-center italic'>
-						&quot;The mind after understanding what previously seemed impossible&quot; ~ Me
-					</figcaption>
-				</figure>
+				<section>
+					<figure className='flex flex-col items-center text-sm'>
+						<Image width={800} src={explosion} alt='nuclear bomb explosion' />
+						<figcaption className='mt-2 text-center italic'>
+							&quot;The mind after understanding what previously seemed
+							impossible&quot; ~ Me
+						</figcaption>
+					</figure>
+				</section>
+				<div className='h-[2px] w-3/4 my-12 mx-auto bg-slate-800'></div>
+				<article>
+					<p className='text-center'>
+						<span className='text-lg font-bold'>This is how it felt</span> when
+						everything finally clicked and I was able to wrap my head around
+						full-stack development.
+					</p>
+				</article>
 			</main>
 		</div>
 	);
