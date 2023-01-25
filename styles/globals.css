@@ -24,6 +24,13 @@
 
 	body {
 		@apply from-black via-cyan-900 to-gray-900;
+		font-family: 'Libre Franklin', sans-serif;
+	}
+}
+
+@layer components {
+	.link {
+		@apply hover:text-blue-700 hover:font-bold hover:scale-105 duration-100 ease-in;
 	}
 }
 
