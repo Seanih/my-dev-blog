@@ -1,10 +1,12 @@
 import Navbar from '../components/Navbar';
 import '../styles/globals.css';
+import logo from '/public/blue-logo.png';
+
 
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<Navbar />
+			<Navbar logo={logo}/>
 			<Component {...pageProps} />
 		</>
 	);

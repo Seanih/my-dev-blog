@@ -19,12 +19,11 @@ export default function Home() {
 					<figure className='flex flex-col items-center text-sm'>
 						<Image width={800} src={explosion} alt='nuclear bomb explosion' />
 						<figcaption className='mt-2 text-center italic'>
-							&quot;The mind after understanding what previously seemed
-							impossible&quot; ~ Me
+							&quot;This is your brain after you finally understand a concept you&apos;ve been struggling with...&quot; ~ Me
 						</figcaption>
 					</figure>
 				</section>
-				<div className='h-[2px] w-3/4 my-12 mx-auto bg-slate-800'></div>
+				<div className='h-[2px] w-3/4 my-10 mx-auto bg-slate-800'></div>
 				<article>
 					<p className='text-center'>
 						<span className='text-lg font-bold'>This is how it felt</span> when
