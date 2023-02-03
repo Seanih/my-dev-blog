@@ -1,67 +1,156 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { useState } from 'react';
+import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { BsPersonLinesFill } from 'react-icons/bs';
 
 function Navbar({ logo }) {
-	const [showNav, setShowNav] = useState(true);
+	const [showNav, setShowNav] = useState(false);
 	const router = useRouter();
 
-	const toggleNav = () => console.log('clicked');
+	const toggleNav = () => setShowNav(!showNav);
 
 	return (
-		<nav className='fixed z-[100] bg-white w-full h-20 px-5 flex justify-between items-center border-b-slate-700 shadow-lg font-semibold text-slate-700'>
-			<div className='flex items-center'>
-				<Image
-					className='bg-slate-200 rounded-lg'
-					src={logo}
-					alt='sean logo'
-					width={75}
-				/>
-				<p>Coding Chronicles</p>
-			</div>
-			{/* full size Navbar */}
-			<ul className='hidden md:flex'>
-				<Link
-					className={`link text-lg ${
-						router.pathname === '/' && 'underline underline-offset-4'
-					}`}
-					href={'/'}
+		<nav className='fixed z-[100] bg-white w-full h-20'>
+			<div className='flex h-full px-5 justify-between items-center border-b-slate-700 shadow-lg font-semibold text-slate-700'>
+				<div className='flex items-center'>
+					<Image
+						className='bg-slate-200 rounded-lg'
+						src={logo}
+						alt='sean logo'
+						width={75}
+					/>
+					<p>Coding Chronicles</p>
+				</div>
+				{/* full size Navbar */}
+				<ul className='hidden md:flex'>
+					<Link
+						className={`link text-lg ${
+							router.pathname === '/' && 'underline underline-offset-4'
+						}`}
+						href={'/'}
+					>
+						<li>Home</li>
+					</Link>
+					<Link
+						className={`link text-lg ml-5 ${
+							router.pathname === '/posts' && 'underline underline-offset-4'
+						}`}
+						href={'/posts'}
+					>
+						<li>Posts</li>
+					</Link>
+					<Link
+						className={`link text-lg ml-5 ${
+							router.pathname === '/contact' && 'underline underline-offset-4'
+						}`}
+						href={'/contact'}
+					>
+						<li>Contact</li>
+					</Link>
+					<Link
+						className={`link text-lg ml-5 ${
+							router.pathname === '/about' && 'underline underline-offset-4'
+						}`}
+						href={'/about'}
+					>
+						<li>About</li>
+					</Link>
+				</ul>
+				{/* HAMBURGER ICON */}
+				<button
+					className='md:hidden hover:cursor-pointer flex'
+					type='button'
+					onClick={toggleNav}
 				>
-					<li>Home</li>
-				</Link>
-				<Link
-					className={`link text-lg ml-5 ${
-						router.pathname === '/all_posts' && 'underline underline-offset-4'
-					}`}
-					href={'/all_posts'}
-				>
-					<li>Posts</li>
-				</Link>
-				<Link
-					className={`link text-lg ml-5 ${
-						router.pathname === '/contact' && 'underline underline-offset-4'
-					}`}
-					href={'/contact'}
-				>
-					<li>Contact</li>
-				</Link>
-				<Link
-					className={`link text-lg ml-5 ${
-						router.pathname === '/about' && 'underline underline-offset-4'
-					}`}
-					href={'/about'}
-				>
-					<li>About</li>
-				</Link>
-			</ul>
-
-			{/* mobile Navbar */}
-			<div className='md:hidden hover:cursor-pointer'>
-				<button type='button' onClick={toggleNav}>
 					<AiOutlineMenu size={35} />
 				</button>
+			</div>
+
+			{/* --------> MOBILE NAVBAR <-------- */}
+			<div
+				className={
+					showNav
+						? 'md:hidden w-full h-screen bg-black/70 ease-in duration-300'
+						: ''
+				}
+			>
+				<div
+					className={
+						showNav
+							? 'md:hidden fixed left-0 top-0 w-[75%] sm:w-[60%] md:[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-300'
+							: 'md:hidden fixed left-[-150%] top-0 p-10 ease-in duration-300'
+					}
+				>
+					<div className='flex items-center'>
+						<Image
+							className='bg-slate-400 rounded-lg mr-4'
+							src={logo}
+							alt='sean logo'
+							width={75}
+						/>
+						<p>Coding Chronicles</p>
+					</div>
+					<ul className='pt-28 h-1/2 flex flex-col justify-between'>
+						<Link
+							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+								router.pathname === '/' && 'underline underline-offset-4'
+							}`}
+							href={'/'}
+							onClick={toggleNav}
+						>
+							<li>Home</li>
+						</Link>
+						<Link
+							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+								router.pathname === '/posts' && 'underline underline-offset-4'
+							}`}
+							href={'/posts'}
+							onClick={toggleNav}
+						>
+							<li>Posts</li>
+						</Link>
+						<Link
+							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+								router.pathname === '/contact' && 'underline underline-offset-4'
+							}`}
+							href={'/contact'}
+							onClick={toggleNav}
+						>
+							<li>Contact</li>
+						</Link>
+						<Link
+							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+								router.pathname === '/about' && 'underline underline-offset-4'
+							}`}
+							href={'/about'}
+							onClick={toggleNav}
+						>
+							<li>About</li>
+						</Link>
+					</ul>
+					<div className='pt-40'>
+						<p className='uppercase tracking-widest text-[#5651e5]'>
+							Let&apos;s Connect
+						</p>
+						<div className='flex item-center justify-between my-4 w-full sm:w-[80%]'>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
+								<FaLinkedinIn />
+							</div>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
+								<FaGithub />
+							</div>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
+								<AiOutlineMail />
+							</div>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
+								<BsPersonLinesFill />
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</nav>
 	);
