@@ -6,7 +6,7 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Coding Chronicles | A New Dev&apos;s Journey</title>
+				<title>Code Chronicles | A New Dev&apos;s Journey</title>
 				<meta
 					name='description'
 					content='a new developer documenting and sharing his experiences'
@@ -17,9 +17,10 @@ export default function Home() {
 			<main className='relative top-20'>
 				<section>
 					<figure className='flex flex-col items-center text-sm'>
-						<Image width={800} src={explosion} alt='nuclear bomb explosion' />
+						<Image src={explosion} alt='nuclear bomb explosion' width={900} />
 						<figcaption className='mt-2 text-center italic'>
-							&quot;This is your brain after you finally understand a concept you&apos;ve been struggling with...&quot; ~ Me
+							&quot;This is your brain after you finally understand a concept
+							you&apos;ve been struggling with...&quot; ~ Me
 						</figcaption>
 					</figure>
 				</section>
