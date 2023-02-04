@@ -6,14 +6,16 @@ import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsPersonLinesFill } from 'react-icons/bs';
 
-function Navbar({ logo }) {
+import logo from '/public/blue-logo.png';
+
+function Navbar() {
 	const [showNav, setShowNav] = useState(false);
 	const router = useRouter();
 
 	const toggleNav = () => setShowNav(!showNav);
 
 	return (
-		<nav className='fixed z-[100] bg-white w-full h-20'>
+		<nav className='fixed z-[100] bg-white/90 w-full h-20'>
 			<div className='flex h-full px-5 justify-between items-center border-b-slate-700 shadow-lg font-semibold text-slate-700'>
 				<div className='flex items-center'>
 					<Image
@@ -22,7 +24,7 @@ function Navbar({ logo }) {
 						alt='sean logo'
 						width={75}
 					/>
-					<p>Coding Chronicles</p>
+					<>Code Chronicles</>
 				</div>
 				{/* full size Navbar */}
 				<ul className='hidden md:flex'>
@@ -80,7 +82,7 @@ function Navbar({ logo }) {
 				<div
 					className={
 						showNav
-							? 'md:hidden fixed left-0 top-0 w-[65%]  h-screen bg-[#ecf0f3] p-10 ease-in duration-300'
+							? 'md:hidden fixed left-0 top-0 w-[55%]  h-screen bg-[#ecf0f3] p-10 ease-in duration-300'
 							: 'md:hidden fixed left-[-100%] top-0 w-[65%]  h-screen bg-[#ecf0f3] p-10 ease-in duration-300'
 					}
 				>
@@ -91,45 +93,54 @@ function Navbar({ logo }) {
 							alt='sean logo'
 							width={75}
 						/>
-						<p>Coding Chronicles</p>
+						<>Code Chronicles</>
 					</div>
 					<ul className='pt-28 h-1/2 flex flex-col justify-between'>
-						<Link
-							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
-								router.pathname === '/' && 'underline underline-offset-4'
-							}`}
-							href={'/'}
-							onClick={toggleNav}
-						>
-							<li>Home</li>
-						</Link>
-						<Link
-							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
-								router.pathname === '/posts' && 'underline underline-offset-4'
-							}`}
-							href={'/posts'}
-							onClick={toggleNav}
-						>
-							<li>Posts</li>
-						</Link>
-						<Link
-							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
-								router.pathname === '/contact' && 'underline underline-offset-4'
-							}`}
-							href={'/contact'}
-							onClick={toggleNav}
-						>
-							<li>Contact</li>
-						</Link>
-						<Link
-							className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
-								router.pathname === '/about' && 'underline underline-offset-4'
-							}`}
-							href={'/about'}
-							onClick={toggleNav}
-						>
-							<li>About</li>
-						</Link>
+						<li>
+							<Link
+								className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+									router.pathname === '/' && 'underline underline-offset-4'
+								}`}
+								href={'/'}
+								onClick={toggleNav}
+							>
+								Home
+							</Link>
+						</li>
+						<li>
+							<Link
+								className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+									router.pathname === '/posts' && 'underline underline-offset-4'
+								}`}
+								href={'/posts'}
+								onClick={toggleNav}
+							>
+								Posts
+							</Link>
+						</li>
+						<li>
+							<Link
+								className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+									router.pathname === '/contact' &&
+									'underline underline-offset-4'
+								}`}
+								href={'/contact'}
+								onClick={toggleNav}
+							>
+								Contact
+							</Link>
+						</li>
+						<li>
+							<Link
+								className={`link text-lg hover:scale-100 hover:text-xl hover:font-bold ${
+									router.pathname === '/about' && 'underline underline-offset-4'
+								}`}
+								href={'/about'}
+								onClick={toggleNav}
+							>
+								About
+							</Link>
+						</li>
 					</ul>
 					<div className='pt-40'>
 						<p className='uppercase tracking-widest text-[#5651e5]'>
