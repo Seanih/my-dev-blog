@@ -14,7 +14,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='relative top-20'>
+			<main className='relative top-20 flex flex-col justify-center items-center'>
 				<section>
 					<figure className='flex flex-col items-center text-sm'>
 						<Image src={explosion} alt='nuclear bomb explosion' width={900} />
@@ -27,7 +27,7 @@ export default function Home() {
 
 				<div className='h-[2px] w-3/4 my-10 mx-auto bg-slate-800'></div>
 
-				<article className='w-full flex justify-center '>
+				<article className='w-full max-w-[1500px] flex justify-center '>
 					<div className='w-3/4'>
 						<p>
 							<span className='text-lg font-bold'>This is how it felt</span>{' '}
@@ -46,7 +46,7 @@ export default function Home() {
 							I ended up making A LOT of mistakes that either slowed or derailed
 							my progress. Ultimately, my lack of progress (and interviews)
 							influenced me to pivot and pursue older aspirations and paths that
-							I thought were &quot;easier&quot; than programming. And that last
+							I thought were &quot;easier&quot; than programming. So that last
 							sentence was just a nice way of saying{' '}
 							<strong>&quot;I gave up&quot;</strong>.
 						</p>
@@ -68,25 +68,32 @@ export default function Home() {
 						</p>
 						<p>
 							That simple - but powerful - mindset change turned someone who was
-							literally terrified of getting a bug they couldn&apos;t understand
-							into someone who gets excited about the opportunity to learn and
-							solve more complex problems!
+							literally <i>terrified</i> of getting a bug they couldn&apos;t
+							understand into someone who gets excited about the opportunity to
+							learn and solve more complex problems!
 						</p>
-						<p>
+						<p className='mb-0'>
 							This mindset is also what inspired me to create this blog, and
-							that&apos;s because I would love to be able help someone else who
-							might be experiencing what I went through. this blog will contain:
-							<ul className='list-disc ml-8'>
-								<li>
-									coding-related concepts & topics that I find interesting or
-									helpful
-								</li>
-								<li>personal stories related to coding</li>
-								<li>short tutorials/instructions</li>
-							</ul>
+							that&apos;s because I want to help someone people who might be
+							experiencing what I went through. This blog will contain:
+						</p>
+						<ul className='list-disc ml-8 mb-4'>
+							<li>personal stories related to coding</li>
+							<li>
+								coding-related concepts & topics that I find interesting or
+								helpful
+							</li>
+							<li>short tutorials/instructions</li>
+						</ul>
+						<p>
+							With that being said, <strong>my name is Sean</strong>. Thanks for
+							reading, and I hope the content I provide can inspire, motivate,
+							entertain and help you on your journey as I take mine.
 						</p>
 					</div>
 				</article>
+
+				<div className='h-[2px] w-3/4 my-10 mx-auto bg-slate-800'></div>
 			</main>
 		</div>
 	);

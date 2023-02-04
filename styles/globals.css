@@ -25,6 +25,8 @@
 	body {
 		@apply from-black via-cyan-900 to-gray-900;
 		font-family: 'Libre Franklin', sans-serif;
+
+		background-color: whitesmoke;
 	}
 }
 
