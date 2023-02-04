@@ -15,7 +15,7 @@ function Navbar() {
 	const toggleNav = () => setShowNav(!showNav);
 
 	return (
-		<nav className='fixed z-[100] bg-white/90 w-full h-20'>
+		<nav className='fixed z-[100] max-w-[1500px]  bg-white/90 w-full h-20'>
 			<div className='flex h-full px-5 justify-between items-center border-b-slate-700 shadow-lg font-semibold text-slate-700'>
 				<div className='flex items-center'>
 					<Image

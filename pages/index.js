@@ -88,7 +88,7 @@ export default function Home() {
 						<p>
 							With that being said, <strong>my name is Sean</strong>. Thanks for
 							reading, and I hope the content I provide can inspire, motivate,
-							entertain and help you on your journey as I take mine.
+							entertain, and help you on your journey as I take mine.
 						</p>
 					</div>
 				</article>

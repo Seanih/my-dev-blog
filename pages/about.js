@@ -1,8 +1,20 @@
-function About() {
+import Head from 'next/head';
+
+function Posts() {
 	return (
 		<div>
-			<main className='relative top-20'>About</main>
+			<Head>
+				<title>Code Chronicles | About</title>
+				<meta
+					name='description'
+					content='a new developer documenting and sharing his experiences'
+				/>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
+			<main className='relative top-20 flex flex-col justify-center items-center'>
+				About
+			</main>
 		</div>
 	);
 }
-export default About;
+export default Posts;
