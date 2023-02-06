@@ -4,7 +4,7 @@ import explosion from '/public/hero_nuclear_blast.jpeg';
 
 export default function Home() {
 	return (
-		<div>
+		<div className='relative top-20'>
 			<Head>
 				<title>Code Chronicles | A New Dev&apos;s Journey</title>
 				<meta
@@ -14,7 +14,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='relative top-20 flex flex-col justify-center items-center'>
+			<main className='flex flex-col justify-center items-center'>
 				<section>
 					<figure className='flex flex-col items-center text-sm'>
 						<Image src={explosion} alt='nuclear bomb explosion' width={900} />

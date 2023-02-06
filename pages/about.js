@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 function Posts() {
 	return (
-		<div>
+		<div className='relative top-20'>
 			<Head>
 				<title>Code Chronicles | About</title>
 				<meta
@@ -11,9 +11,7 @@ function Posts() {
 				/>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main className='relative top-20 flex flex-col justify-center items-center'>
-				About
-			</main>
+			<main className='flex flex-col justify-center items-center'>About</main>
 		</div>
 	);
 }
