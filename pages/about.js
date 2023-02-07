@@ -1,8 +1,8 @@
 import Head from 'next/head';
 
-function Posts() {
+function About() {
 	return (
-		<div className='relative top-20'>
+		<div className='relative top-20 h-screen'>
 			<Head>
 				<title>Code Chronicles | About</title>
 				<meta
@@ -15,4 +15,4 @@ function Posts() {
 		</div>
 	);
 }
-export default Posts;
+export default About;

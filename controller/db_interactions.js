@@ -16,7 +16,7 @@ export const getAllPosts = async res => {
 	const poolClient = await pool.connect();
 
 	try {
-		const sqlQuery = 'SELECT * FROM posts';
+		const sqlQuery = 'SELECT * FROM posts ORDER BY id DESC';
 		const result = await poolClient.query(sqlQuery);
 
 		res.status(200).json(result.rows);
@@ -84,7 +84,7 @@ export const modifyPost = async (req, res) => {
 		await client.connect();
 		await client.query(sqlQuery, queryValues);
 
-		res.status(200).json('you made the update!');
+		res.status(200).json({ success: 'you made the update!' });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	} finally {
@@ -99,7 +99,7 @@ export const deletePost = async (req, res) => {
 		await client.connect();
 		await client.query(sqlQuery, [req.query.post_id]);
 
-		res.status(200).json({ message: 'deleted post!' });
+		res.status(200).json({ success: 'deleted post!' });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	} finally {

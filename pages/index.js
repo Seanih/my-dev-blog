@@ -74,7 +74,7 @@ export default function Home() {
 						</p>
 						<p className='mb-0'>
 							This mindset is also what inspired me to create this blog, and
-							that&apos;s because I want to help someone people who might be
+							that&apos;s because I want to help people who might be
 							experiencing what I went through. This blog will contain:
 						</p>
 						<ul className='list-disc ml-8 mb-4'>
