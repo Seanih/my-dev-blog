@@ -1,17 +1,20 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import PostPreview from '../../components/PostPreview';
 
 export async function getServerSideProps(context) {
 	let result, blogPosts;
 
-	result = await fetch('http://localhost:3000/api/posts');
-	blogPosts = await result.json();
+	try {
+		result = await fetch('http://localhost:3000/api/posts');
+		blogPosts = await result.json();
 
-	// console.log(error.message);
-
-	return {
-		props: { blogPosts },
-	};
+		return {
+			props: { blogPosts },
+		};
+	} catch (error) {
+		console.log(error.message);
+	}
 }
 
 function Posts({ blogPosts }) {
@@ -37,11 +40,7 @@ function Posts({ blogPosts }) {
 				{allBlogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
-					allBlogPosts.map(post => (
-						<div key={post.id} className='h-[10rem] w-[30rem] border border-slate-700 rounded-xl my-4'>
-							<h3>{post.title}</h3>
-						</div>
-					))
+					allBlogPosts.map(post => <PostPreview key={post.id} post={post} />)
 				)}
 			</main>
 		</div>
