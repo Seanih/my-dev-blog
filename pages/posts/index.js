@@ -27,6 +27,7 @@ function Posts({ blogPosts }) {
 		}
 	}, [blogPosts]);
 
+	// Framer Motion attributes
 	const list = {
 		visible: {
 			opacity: 1,
@@ -58,6 +59,7 @@ function Posts({ blogPosts }) {
 				/>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
+
 			<main className='flex flex-col justify-center items-center'>
 				{allBlogPosts.length < 1 ? (
 					<p>no blog posts</p>
