@@ -31,7 +31,7 @@ function EditSpecificPost({ post }) {
 			setEditedBlogPost('');
 			router.push('/posts');
 		} catch (error) {
-			console.log(error.message);
+			console.error(error.message);
 		}
 	};
 

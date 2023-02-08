@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import PostPreview from '../../components/PostPreview';
 
 export async function getServerSideProps(context) {
@@ -13,7 +14,7 @@ export async function getServerSideProps(context) {
 			props: { blogPosts },
 		};
 	} catch (error) {
-		console.log(error.message);
+		console.error(error.message);
 	}
 }
 
@@ -25,6 +26,27 @@ function Posts({ blogPosts }) {
 			setAllBlogPosts(blogPosts);
 		}
 	}, [blogPosts]);
+
+	const list = {
+		visible: {
+			opacity: 1,
+			transition: {
+				when: 'beforeChildren',
+				staggerChildren: 0.1,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			transition: {
+				when: 'afterChildren',
+			},
+		},
+	};
+
+	const item = {
+		visible: { opacity: 1, x: 0 },
+		hidden: { opacity: 0, x: -100 },
+	};
 
 	return (
 		<div className='relative top-20 h-screen'>
@@ -40,7 +62,13 @@ function Posts({ blogPosts }) {
 				{allBlogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
-					allBlogPosts.map(post => <PostPreview key={post.id} post={post} />)
+					<motion.div variants={list} initial='hidden' animate='visible'>
+						{allBlogPosts.map(post => (
+							<motion.div key={post.id} variants={item}>
+								<PostPreview post={post} />
+							</motion.div>
+						))}
+					</motion.div>
 				)}
 			</main>
 		</div>
