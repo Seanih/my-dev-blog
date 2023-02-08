@@ -14,10 +14,11 @@ export async function getServerSideProps({ params: { id } }) {
 }
 
 function PostID({ post }) {
+	const markdownPost = marked(post.post_content);
 	return (
 		<div className='relative top-20 h-screen'>
-			<h1>{post.title}</h1>
-			<p>{post.post_content}</p>
+			<div>{post.title}</div>
+			<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
 		</div>
 	);
 }

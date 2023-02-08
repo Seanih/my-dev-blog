@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-function CreatePosts() {
+function CreatePost() {
 	const [title, setTitle] = useState('');
 	const [blogPost, setBlogPost] = useState('');
 	const router = useRouter();
@@ -63,4 +63,4 @@ function CreatePosts() {
 		</div>
 	);
 }
-export default CreatePosts;
+export default CreatePost;
