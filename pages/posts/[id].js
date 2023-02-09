@@ -17,7 +17,7 @@ export async function getServerSideProps({ params: { id } }) {
 function PostID({ post }) {
 	const markdownPost = marked(post.post_content);
 	return (
-		<div className='relative top-20 h-screen'>
+		<div className='relative top-20'>
 			<div className='relative top-8 w-[90%] max-w-[1200px]  m-auto border border-black/40 rounded-xl'>
 				<motion.div
 					initial={{ opacity: 0, x: -75 }}

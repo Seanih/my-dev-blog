@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import AdminNavbar from '../../components/AdminNavbar';
 
 function CreatePost() {
 	const [title, setTitle] = useState('');
@@ -23,7 +24,7 @@ function CreatePost() {
 	};
 
 	return (
-		<div className='relative top-20 h-screen'>
+		<div className='relative top-20'>
 			<form className='flex flex-col w-[70%] m-auto py-2'>
 				<div>
 					<label className='block' htmlFor='title'>
@@ -57,9 +58,10 @@ function CreatePost() {
 					type='submit'
 					onClick={handleSubmitPost}
 				>
-					Post
+					Add Post
 				</button>
 			</form>
+			<AdminNavbar page={router.asPath} />
 		</div>
 	);
 }

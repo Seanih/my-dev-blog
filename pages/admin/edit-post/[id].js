@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import AdminNavbar from '../../../components/AdminNavbar';
 
 export async function getServerSideProps({ params: { id } }) {
 	const response = await fetch(`http://localhost:3000/api/posts/${id}`);
-
 	const blogPost = await response.json();
 	const post = blogPost[0];
 
@@ -22,7 +22,11 @@ function EditSpecificPost({ post }) {
 
 	const handleEditPost = async e => {
 		e.preventDefault();
-		let blogContent = { title: editedBlogTitle, post_content: editedBlogPost };
+
+		const blogContent = {
+			title: editedBlogTitle,
+			post_content: editedBlogPost,
+		};
 
 		try {
 			await axios.patch(`/api/posts/${post.id}`, blogContent);
@@ -36,7 +40,7 @@ function EditSpecificPost({ post }) {
 	};
 
 	return (
-		<div className='relative top-20 h-screen'>
+		<div className='relative top-20'>
 			<form className='flex flex-col w-[70%] m-auto py-2'>
 				<div>
 					<label className='block' htmlFor='title'>
@@ -73,6 +77,7 @@ function EditSpecificPost({ post }) {
 					Submit Edit
 				</button>
 			</form>
+			<AdminNavbar page={router.asPath} />
 		</div>
 	);
 }

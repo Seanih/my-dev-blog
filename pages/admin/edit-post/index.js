@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import PostPreview from '../../components/PostPreview';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import PostPreview from '../../../components/PostPreview';
+import AdminNavbar from '../../../components/AdminNavbar';
 import Link from 'next/link';
+import axios from 'axios';
 
 export async function getServerSideProps(context) {
 	let result, blogPosts;
@@ -21,6 +24,19 @@ export async function getServerSideProps(context) {
 
 function Posts({ blogPosts }) {
 	const [allBlogPosts, setAllBlogPosts] = useState([]);
+
+	const handleDeletePost = async post => {
+		try {
+			let response = confirm(`Delete post titled: "${post.title}"?`);
+
+			if (response) {
+				await axios.delete(`/api/posts/${post.id}`);
+				window.location.reload();
+			}
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
 
 	useEffect(() => {
 		if (blogPosts.length > 0) {
@@ -53,7 +69,7 @@ function Posts({ blogPosts }) {
 	return (
 		<div className='relative top-20'>
 			<Head>
-				<title>Code Chronicles | Posts</title>
+				<title>Code Chronicles | Edit Posts</title>
 				<meta
 					name='description'
 					content='a new developer documenting and sharing his experiences'
@@ -62,13 +78,21 @@ function Posts({ blogPosts }) {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
+				<AdminNavbar />
 				{allBlogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
 					<motion.div variants={list} initial='hidden' animate='visible'>
 						{allBlogPosts.map(post => (
-							<motion.div key={post.id} variants={item}>
-								<Link href={`/posts/${post.id}`}>
+							<motion.div className='relative' key={post.id} variants={item}>
+								<AiFillDelete
+									className='absolute left-[-2rem] top-1/2 hover:cursor-pointer hover:scale-125'
+									onClick={() => {
+										handleDeletePost(post);
+									}}
+								/>
+								<Link href={`/admin/edit-post/${post.id}`}>
+									<AiFillEdit className='absolute top-8 right-8' />
 									<PostPreview post={post} />
 								</Link>
 							</motion.div>

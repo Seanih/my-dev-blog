@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 function Contact() {
 	return (
-		<div className='relative top-20 h-screen'>
+		<div className='relative top-20'>
 			<Head>
 				<title>Code Chronicles | Contact</title>
 				<meta
