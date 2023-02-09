@@ -43,7 +43,7 @@ function EditSpecificPost({ post }) {
 						Edit Title:{' '}
 					</label>
 					<input
-						className='w-full px-2'
+						className='w-full px-2 mt-2 mb-8'
 						type='text'
 						name='title'
 						value={editedBlogTitle}
@@ -56,7 +56,7 @@ function EditSpecificPost({ post }) {
 						Edit Blog Post:{' '}
 					</label>
 					<textarea
-						className='w-full px-2'
+						className='w-full px-2 mt-2'
 						name='blogPost'
 						id='blogPost'
 						rows={15}
