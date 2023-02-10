@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import PostPreview from '../../../components/PostPreview';
-import AdminNavbar from '../../../components/AdminNavbar';
+import AdminNav from '../../../components/AdminNav';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -78,7 +78,7 @@ function Posts({ blogPosts }) {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
-				<AdminNavbar />
+				<AdminNav />
 				{allBlogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
@@ -92,7 +92,7 @@ function Posts({ blogPosts }) {
 									}}
 								/>
 								<Link href={`/admin/edit-post/${post.id}`}>
-									<AiFillEdit className='absolute top-8 right-8' />
+									<AiFillEdit className='absolute top-8 right-8 scale-125' />
 									<PostPreview post={post} />
 								</Link>
 							</motion.div>

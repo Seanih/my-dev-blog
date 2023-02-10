@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import AdminNavbar from '../../components/AdminNavbar';
+import AdminNav from '../../components/AdminNav';
 
 function CreatePost() {
 	const [title, setTitle] = useState('');
@@ -61,7 +61,7 @@ function CreatePost() {
 					Add Post
 				</button>
 			</form>
-			<AdminNavbar page={router.asPath} />
+			<AdminNav page={router.asPath} />
 		</div>
 	);
 }

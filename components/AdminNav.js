@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-function AdminNavbar({ page }) {
+function AdminNav({ page }) {
 	return (
 		<div className='flex justify-center'>
 			<Link
-				className='p-2'
+				className='p-2 hover:font-bold hover:border hover:border-black duration-100'
 				href={
 					page === '/admin/create-post'
 						? '/admin/edit-post'
@@ -18,4 +18,4 @@ function AdminNavbar({ page }) {
 		</div>
 	);
 }
-export default AdminNavbar;
+export default AdminNav;

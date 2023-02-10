@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import AdminNavbar from '../../../components/AdminNavbar';
+import AdminNav from '../../../components/AdminNav';
 
 export async function getServerSideProps({ params: { id } }) {
 	const response = await fetch(`http://localhost:3000/api/posts/${id}`);
@@ -77,7 +77,7 @@ function EditSpecificPost({ post }) {
 					Submit Edit
 				</button>
 			</form>
-			<AdminNavbar page={router.asPath} />
+			<AdminNav page={router.asPath} />
 		</div>
 	);
 }
