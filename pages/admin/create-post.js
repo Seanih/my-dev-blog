@@ -25,7 +25,10 @@ function CreatePost() {
 
 	return (
 		<div className='relative top-20'>
-			<form className='flex flex-col w-[70%] m-auto py-2'>
+			<form
+				className='flex flex-col w-[70%] m-auto py-2'
+				onSubmit={handleSubmitPost}
+			>
 				<div>
 					<label className='block' htmlFor='title'>
 						Title:{' '}
@@ -56,7 +59,6 @@ function CreatePost() {
 				<button
 					className='mt-4 py-4 outline hover:bg-black hover:text-white'
 					type='submit'
-					onClick={handleSubmitPost}
 				>
 					Add Post
 				</button>

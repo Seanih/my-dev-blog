@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
@@ -8,34 +7,31 @@ function Contact() {
 	const [email, setEmail] = useState('');
 	const [subject, setSubject] = useState('');
 	const [message, setMessage] = useState('');
-	const [responseMessage, setResponseMessage] = useState({
-		isSuccessful: false,
-		message: '',
-	});
 
 	const formRef = useRef();
 
 	const handleNameChange = e => {
 		setName(e.target.value);
-		console.log(name);
 	};
 	const handleEmailChange = e => {
 		setEmail(e.target.value);
-		console.log(email);
 	};
 	const handleSubjectChange = e => {
 		setSubject(e.target.value);
-		console.log(subject);
 	};
 	const handleMessageChange = e => {
 		setMessage(e.target.value);
-		console.log(message);
+	};
+
+	const handleClearForm = () => {
+		setName('');
+		setEmail('');
+		setSubject('');
+		setMessage('');
 	};
 
 	const handleSendMessage = async e => {
 		e.preventDefault();
-
-		// const userInputValues = { name, email, subject, message };
 
 		try {
 			let result = await emailjs.sendForm(
@@ -47,21 +43,11 @@ function Contact() {
 
 			console.log(result?.text);
 
-			setName('');
-			setEmail('');
-			setSubject('');
-			setMessage('');
+			handleClearForm();
 			alert('Message sent successfully!');
 		} catch (error) {
 			console.error(error);
 		}
-	};
-
-	const handleClearForm = () => {
-		setName('');
-		setEmail('');
-		setSubject('');
-		setMessage('');
 	};
 
 	return (

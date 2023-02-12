@@ -49,8 +49,8 @@ export default function Home() {
 						>
 							<p>
 								<span className='text-lg font-bold'>This is how it felt</span>{' '}
-								when things finally clicked and I was able to wrap my head
-								around full-stack development a few months ago.
+								when things finally clicked a few months ago and I was able to
+								wrap my head around full-stack development.
 							</p>
 							<p>
 								Like most people who try to learn web development, my goal was
