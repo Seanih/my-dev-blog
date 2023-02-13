@@ -1,9 +1,21 @@
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import AdminNav from '../../../components/AdminNav';
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, context }) {
+	const session = await getSession(context);
+
+	if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+		return {
+			redirect: {
+				destination: '/sign-in',
+				permanent: false,
+			},
+		};
+	}
+
 	const response = await fetch(`http://localhost:3000/api/posts/${id}`);
 	const blogPost = await response.json();
 	const post = blogPost[0];

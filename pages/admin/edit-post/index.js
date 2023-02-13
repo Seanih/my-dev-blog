@@ -6,9 +6,20 @@ import PostPreview from '../../../components/PostPreview';
 import AdminNav from '../../../components/AdminNav';
 import Link from 'next/link';
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 
 export async function getServerSideProps(context) {
+	const session = await getSession(context);
 	let result, blogPosts;
+
+	if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+		return {
+			redirect: {
+				destination: '/sign-in',
+				permanent: false,
+			},
+		};
+	}
 
 	try {
 		result = await fetch('http://localhost:3000/api/posts');

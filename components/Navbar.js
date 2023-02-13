@@ -1,16 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsPersonLinesFill } from 'react-icons/bs';
 
 import logo from '/public/blue-logo.png';
+import { useSession } from 'next-auth/react';
 
-function Navbar() {
+function Navbar({ user }) {
 	const [showNav, setShowNav] = useState(false);
 	const router = useRouter();
+	const { data: session, status } = useSession();
 
 	const toggleNav = () => setShowNav(!showNav);
 
@@ -29,7 +31,7 @@ function Navbar() {
 				{/* full size Navbar */}
 				<ul className='hidden md:flex'>
 					<Link
-						className={`link text-lg ${
+						className={`link ${
 							router.pathname === '/' && 'underline underline-offset-4'
 						}`}
 						href={'/'}
@@ -37,7 +39,7 @@ function Navbar() {
 						<li>Home</li>
 					</Link>
 					<Link
-						className={`link text-lg ml-5 ${
+						className={`link ml-5 ${
 							router.pathname === '/posts' && 'underline underline-offset-4'
 						}`}
 						href={'/posts'}
@@ -45,7 +47,7 @@ function Navbar() {
 						<li>Posts</li>
 					</Link>
 					<Link
-						className={`link text-lg ml-5 ${
+						className={`link ml-5 ${
 							router.pathname === '/contact' && 'underline underline-offset-4'
 						}`}
 						href={'/contact'}
@@ -53,12 +55,22 @@ function Navbar() {
 						<li>Contact</li>
 					</Link>
 					<Link
-						className={`link text-lg ml-5 ${
+						className={`link ml-5 ${
 							router.pathname === '/about' && 'underline underline-offset-4'
 						}`}
 						href={'/about'}
 					>
 						<li>About</li>
+					</Link>
+					<Link
+						className={`link ml-5 ${
+							(router.pathname === '/sign-in' ||
+								router.pathname === '/sign-out') &&
+							'underline underline-offset-4'
+						}`}
+						href={session?.user ? '/sign-out' : '/sign-in'}
+					>
+						<li>{!session ? 'Sign_In' : 'Sign_Out'}</li>
 					</Link>
 				</ul>
 				{/* HAMBURGER ICON */}

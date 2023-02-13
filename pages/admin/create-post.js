@@ -1,7 +1,25 @@
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import AdminNav from '../../components/AdminNav';
+
+export async function getServerSideProps(context) {
+	const session = await getSession(context);
+
+	if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+		return {
+			redirect: {
+				destination: '/sign-in',
+				permanent: false,
+			},
+		};
+	}
+
+	return {
+		props: { user: session.user },
+	};
+}
 
 function CreatePost() {
 	const [title, setTitle] = useState('');
