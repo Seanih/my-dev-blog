@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsPersonLinesFill } from 'react-icons/bs';
@@ -9,7 +9,7 @@ import { BsPersonLinesFill } from 'react-icons/bs';
 import logo from '/public/blue-logo.png';
 import { useSession } from 'next-auth/react';
 
-function Navbar({ user }) {
+function Navbar() {
 	const [showNav, setShowNav] = useState(false);
 	const router = useRouter();
 	const { data: session, status } = useSession();
@@ -151,6 +151,19 @@ function Navbar({ user }) {
 								onClick={toggleNav}
 							>
 								About
+							</Link>
+						</li>
+						<li>
+							<Link
+								className={`link hover:text-lg hover:font-bold ${
+									(router.pathname === '/sign-in' ||
+										router.pathname === '/sign-out') &&
+									'underline underline-offset-4'
+								}`}
+								href={session?.user ? '/sign-out' : '/sign-in'}
+								onClick={toggleNav}
+							>
+								{!session ? 'Sign_In' : 'Sign_Out'}
 							</Link>
 						</li>
 					</ul>

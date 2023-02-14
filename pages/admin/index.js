@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
-import { useState } from 'react';
 
 export async function getServerSideProps(context) {
 	const session = await getSession(context);
