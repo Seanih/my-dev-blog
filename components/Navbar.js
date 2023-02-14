@@ -28,7 +28,7 @@ function Navbar() {
 					/>
 					<>Code Chronicles</>
 				</div>
-				{/* full size Navbar */}
+				{/* ----------> full size Navbar <---------- */}
 				<ul className='hidden md:flex'>
 					<Link
 						className={`link ${
@@ -107,6 +107,12 @@ function Navbar() {
 						/>
 						<>Code Chronicles</>
 					</div>
+					<div
+						className='absolute right-8 top-[25%] inline-block rounded-full p-2 shadow-xl shadow-gray-600 hover:cursor-pointer hover:scale-110'
+						onClick={toggleNav}
+					>
+						<AiOutlineClose />
+					</div>
 					<ul className='pt-28 h-1/2 flex flex-col justify-between'>
 						<li>
 							<Link
@@ -155,7 +161,7 @@ function Navbar() {
 						</li>
 						<li>
 							<Link
-								className={`link hover:text-lg hover:font-bold ${
+								className={`link text-lg hover:text-xl hover:scale-100 hover:font-bold ${
 									(router.pathname === '/sign-in' ||
 										router.pathname === '/sign-out') &&
 									'underline underline-offset-4'
@@ -167,6 +173,7 @@ function Navbar() {
 							</Link>
 						</li>
 					</ul>
+					{/* ---------- social media links ---------- */}
 					<div className='pt-40'>
 						<p className='uppercase tracking-widest text-[#5651e5]'>
 							Let&apos;s Connect
