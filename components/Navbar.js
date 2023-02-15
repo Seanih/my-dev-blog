@@ -105,7 +105,7 @@ function Navbar() {
 							alt='sean logo'
 							width={75}
 						/>
-						<>Code Chronicles</>
+						Code Chronicles
 					</div>
 					<div
 						className='absolute right-8 top-[25%] inline-block rounded-full p-2 shadow-xl shadow-gray-600 hover:cursor-pointer hover:scale-110'

@@ -106,3 +106,75 @@ export const deletePost = async (req, res) => {
 		client.end();
 	}
 };
+
+export const addCommentToBlogPost = async (req, res) => {
+	const checkUserQuery = `SELECT * FROM commenters WHERE email = $1`;
+	const addCommenterQuery = `INSERT INTO commenters (name, email) VALUES ($1,$2)`;
+	const addCommentToPostQuery = `INSERT INTO comments (commenter_id, post_id, comment_text) VALUES ($1, $2, $3)`;
+
+	const poolClient = await pool.connect();
+
+	// check if user already exists
+	let doesUserExist;
+
+	try {
+		doesUserExist = await poolClient.query(checkUserQuery, [
+			req.body.userEmail,
+		]);
+	} catch (error) {
+		console.error(error.message);
+	} finally {
+		poolClient.release();
+	}
+
+	// add comment if user is found
+	if (doesUserExist?.rowCount) {
+		try {
+			await client.connect();
+			await client.query(addCommentToPostQuery, [
+				doesUserExist.rows[0].id,
+				req.query.post_id,
+				req.body.comment_text,
+			]);
+
+			res.status(201).json({ success: 'you successfully made a comment!' });
+		} catch (error) {
+			res.status(500).json({ error: error.message });
+		} finally {
+			client.end();
+		}
+	} else {
+		// create user if non-existent
+		try {
+			await client.connect();
+
+			await client.query(addCommenterQuery, [
+				req.body.userName,
+				req.body.userEmail,
+			]);
+
+			client.end();
+
+			// add comment with new user info
+			const getCommenterID = await poolClient.query(checkUserQuery, [
+				req.body.userEmail,
+			]);
+			const commenterID = getCommenterID.rows[0].id;
+			poolClient.release();
+
+			await client.connect();
+
+			await client.query(addCommentToPostQuery, [
+				commenterID,
+				req.query.post_id,
+				req.body.comment_text,
+			]);
+
+			res.status(201).json({ success: 'you successfully made a comment!' });
+
+			client.end();
+		} catch (error) {
+			res.status(500).json({ error: error.message });
+		}
+	}
+};
