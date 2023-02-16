@@ -30,11 +30,8 @@ function PostID({ post, comments }) {
 	return (
 		<div className='relative top-20'>
 			<Head>
-				<title>Code Chronicles | Blog Post #{post.id}</title>
-				<meta
-					name='description'
-					content='A blog post for Code Chronicles'
-				/>
+				<title>Code Chronicles | Blog Post</title>
+				<meta name='description' content='A blog post for Code Chronicles' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
