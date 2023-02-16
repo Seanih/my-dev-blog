@@ -1,4 +1,9 @@
+import { useEffect, useState } from 'react';
+
 function UserComment({ comment: { name, comment_text, created_at } }) {
+	const [userName, setUserName] = useState('');
+	const [userComment, setUserComment] = useState('');
+	const [timePosted, setTimePosted] = useState('');
 	// capitalize the first letters of the user's names
 	const formattedName = user_name => {
 		let fixedName;
@@ -19,28 +24,34 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 		return fixedName;
 	};
 
-	const timePosted = new Date(created_at).toLocaleString();
+	useEffect(() => {
+		// transferred props to state to prevent hydration issues
+		if (name) {
+			setUserName(formattedName(name));
+		}
+		if (comment_text) {
+			setUserComment(comment_text);
+		}
+		if (created_at) {
+			setTimePosted(new Date(created_at).toLocaleString());
+		}
+	}, [comment_text, created_at, name]);
 
 	return (
 		<div className='relative top-20 w-[80%] max-w-[1080px]  m-auto border border-black/40 rounded-xl mb-4'>
 			<div className='w-[90%] m-auto py-12'>
-				<div className='flex flex-wrap justify-between w-4/5 m-auto'>
-					<p className="mr-6">
-						<strong className='text-sm mr-2'>Name: </strong>{' '}
-						{formattedName(name)}
-					</p>
-					<p>
-						<i className='text-sm'>
-							<strong className='mr-2'>Posted: </strong>
-							{timePosted}
-						</i>
-					</p>
+				<div className='flex flex-wrap justify-between w-4/5 m-auto mb-2 text-sm'>
+					<div className='text-sm font-bold'>
+						Name:{' '}
+						<span className='ml-2 text-base font-normal italic'>
+							{userName}
+						</span>
+					</div>
+					<div className='font-bold'>
+						Posted: <span className='ml-2 font-normal'>{timePosted}</span>
+					</div>
 				</div>
-				<div className='bg-white rounded-xl p-4'>
-					<p className='m-0'>
-						<i>{comment_text}</i>
-					</p>
-				</div>
+				<div className='bg-white rounded-xl p-4'>{userComment}</div>
 			</div>
 		</div>
 	);

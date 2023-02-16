@@ -27,6 +27,27 @@ export async function getServerSideProps({ params: { id } }) {
 function PostID({ post, comments }) {
 	const markdownPost = marked(post.post_content);
 
+	const list = {
+		visible: {
+			opacity: 1,
+			transition: {
+				when: 'beforeChildren',
+				staggerChildren: 0.1,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			transition: {
+				when: 'afterChildren',
+			},
+		},
+	};
+
+	const item = {
+		visible: { opacity: 1, x: 0 },
+		hidden: { opacity: 0, x: 100 },
+	};
+
 	return (
 		<div className='relative top-20'>
 			<Head>
@@ -39,7 +60,7 @@ function PostID({ post, comments }) {
 				<motion.div
 					initial={{ opacity: 0, x: -75 }}
 					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.7 }}
+					transition={{ duration: 0.3 }}
 					viewport={{ once: true }}
 				>
 					<h1 className='pt-8 mb-12 text-center'>{post.title}</h1>
@@ -47,18 +68,26 @@ function PostID({ post, comments }) {
 				<motion.div
 					initial={{ opacity: 0, x: 75 }}
 					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.7 }}
+					transition={{ duration: 0.3 }}
+					viewport={{ once: true }}
 				>
 					<div className='w-[90%] m-auto mb-8'>
 						<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
 					</div>
 				</motion.div>
 			</div>
-			<div className='pb-8'>
+			<motion.div
+				className='pb-8'
+				variants={list}
+				initial='hidden'
+				animate='visible'
+			>
 				{comments.map(comment => (
-					<UserComment key={comment.comment_id} comment={comment} />
+					<motion.div key={comment.comment_id} variants={item}>
+						<UserComment comment={comment} />
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
 		</div>
 	);
 }
