@@ -3,7 +3,7 @@ import {
 	deletePost,
 	getSpecificPost,
 	modifyPost,
-} from '../../../controller/db_interactions';
+} from '../../../../controller/db_interactions';
 
 export default async function handler(req, res) {
 	if (req.method === 'GET') {

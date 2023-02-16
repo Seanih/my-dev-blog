@@ -16,7 +16,9 @@ export async function getServerSideProps({ params: { id }, context }) {
 		};
 	}
 
-	const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+	const response = await fetch(
+		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}`
+	);
 	const blogPost = await response.json();
 	const post = blogPost[0];
 

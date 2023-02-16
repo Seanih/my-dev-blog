@@ -1,24 +1,43 @@
+import Head from 'next/head';
 import { marked } from 'marked';
 import { motion } from 'framer-motion';
+import UserComment from '../../components/UserComment';
 
 export async function getServerSideProps({ params: { id } }) {
-	const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+	let response = await fetch(
+		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}`
+	);
 
 	const blogPost = await response.json();
 	const post = blogPost[0];
 
+	response = await fetch(
+		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}/comments`
+	);
+	const comments = await response.json();
+
 	return {
 		props: {
 			post,
+			comments,
 		},
 	};
 }
 
-function PostID({ post }) {
+function PostID({ post, comments }) {
 	const markdownPost = marked(post.post_content);
 
 	return (
 		<div className='relative top-20'>
+			<Head>
+				<title>Code Chronicles | Blog Post #{post.id}</title>
+				<meta
+					name='description'
+					content='A blog post for Code Chronicles'
+				/>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
+
 			<div className='relative top-8 w-[90%] max-w-[1200px]  m-auto border border-black/40 rounded-xl'>
 				<motion.div
 					initial={{ opacity: 0, x: -75 }}
@@ -37,6 +56,11 @@ function PostID({ post }) {
 						<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
 					</div>
 				</motion.div>
+			</div>
+			<div className='pb-8'>
+				{comments.map(comment => (
+					<UserComment key={comment.comment_id} comment={comment} />
+				))}
 			</div>
 		</div>
 	);

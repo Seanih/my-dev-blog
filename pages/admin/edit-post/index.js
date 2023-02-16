@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
 	}
 
 	try {
-		result = await fetch('http://localhost:3000/api/posts');
+		result = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts`);
 		blogPosts = await result.json();
 
 		return {

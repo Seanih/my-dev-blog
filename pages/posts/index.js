@@ -8,7 +8,7 @@ export async function getServerSideProps(context) {
 	let result, blogPosts;
 
 	try {
-		result = await fetch('http://localhost:3000/api/posts');
+		result = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts`);
 		blogPosts = await result.json();
 
 		return {
@@ -20,14 +20,6 @@ export async function getServerSideProps(context) {
 }
 
 function Posts({ blogPosts }) {
-	const [allBlogPosts, setAllBlogPosts] = useState([]);
-
-	useEffect(() => {
-		if (blogPosts.length > 0) {
-			setAllBlogPosts(blogPosts);
-		}
-	}, [blogPosts]);
-
 	// Framer Motion attributes
 	const list = {
 		visible: {
@@ -62,11 +54,11 @@ function Posts({ blogPosts }) {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
-				{allBlogPosts.length < 1 ? (
+				{blogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
 					<motion.div variants={list} initial='hidden' animate='visible'>
-						{allBlogPosts.map(post => (
+						{blogPosts.map(post => (
 							<motion.div key={post.id} variants={item}>
 								<Link href={`/posts/${post.id}`}>
 									<PostPreview post={post} />

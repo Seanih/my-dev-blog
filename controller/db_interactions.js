@@ -178,3 +178,18 @@ export const addCommentToBlogPost = async (req, res) => {
 		}
 	}
 };
+
+export const getPostComments = async (req, res) => {
+	const poolClient = await pool.connect();
+	try {
+		const sqlQuery =
+			'SELECT name, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
+
+		let result = await poolClient.query(sqlQuery, [req.query.post_id]);
+
+		res.status(200).json(result.rows);
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).json({ error: error.message });
+	}
+};
