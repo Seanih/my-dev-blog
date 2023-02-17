@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { marked } from 'marked';
 import { motion } from 'framer-motion';
 import UserComment from '../../components/UserComment';
+import AddComment from '../../components/AddComment';
 
 export async function getServerSideProps({ params: { id } }) {
 	let response = await fetch(
@@ -76,18 +77,23 @@ function PostID({ post, comments }) {
 					</div>
 				</motion.div>
 			</div>
-			<motion.div
-				className='pb-8'
-				variants={list}
-				initial='hidden'
-				animate='visible'
-			>
-				{comments.map(comment => (
-					<motion.div key={comment.comment_id} variants={item}>
-						<UserComment comment={comment} />
-					</motion.div>
-				))}
-			</motion.div>
+			<section className='relative top-20'>
+				<AddComment />
+				<motion.div
+					className='pb-8'
+					variants={list}
+					initial='hidden'
+					animate='visible'
+				>
+					<h3 className='text-center relative top-16'>Comments</h3>
+
+					{comments.map(comment => (
+						<motion.div key={comment.comment_id} variants={item}>
+							<UserComment comment={comment} />
+						</motion.div>
+					))}
+				</motion.div>
+			</section>
 		</div>
 	);
 }

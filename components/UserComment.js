@@ -4,6 +4,7 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 	const [userName, setUserName] = useState('');
 	const [userComment, setUserComment] = useState('');
 	const [timePosted, setTimePosted] = useState('');
+
 	// capitalize the first letters of the user's names
 	const formattedName = user_name => {
 		let fixedName;
@@ -38,8 +39,8 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 	}, [comment_text, created_at, name]);
 
 	return (
-		<div className='relative top-20 w-[80%] max-w-[1080px]  m-auto border border-black/40 rounded-xl mb-4'>
-			<div className='w-[90%] m-auto py-12'>
+		<div className='relative top-20 w-[80%] max-w-[800px]  m-auto border border-black/40 rounded-xl mb-4'>
+			<div className='w-[90%] m-auto py-8'>
 				<div className='flex flex-wrap justify-between w-4/5 m-auto mb-2 text-sm'>
 					<div className='text-sm font-bold'>
 						Name:{' '}
@@ -48,7 +49,8 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 						</span>
 					</div>
 					<div className='font-bold'>
-						Posted: <span className='ml-2 font-normal'>{timePosted}</span>
+						Posted:{' '}
+						<span className='italic ml-2 font-normal'>{timePosted}</span>
 					</div>
 				</div>
 				<div className='bg-white rounded-xl p-4'>{userComment}</div>
