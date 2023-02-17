@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { marked } from 'marked';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import UserComment from '../../components/UserComment';
 import AddComment from '../../components/AddComment';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export async function getServerSideProps({ params: { id } }) {
 	let response = await fetch(
@@ -26,7 +28,17 @@ export async function getServerSideProps({ params: { id } }) {
 }
 
 function PostID({ post, comments }) {
+	const { data: session, status } = useSession();
+	const [userAuthenticated, setUserAuthenticated] = useState(false);
 	const markdownPost = marked(post.post_content);
+
+	useEffect(() => {
+		if (status === 'authenticated') {
+			setUserAuthenticated(true);
+		} else {
+			setUserAuthenticated(false);
+		}
+	}, [status]);
 
 	const list = {
 		visible: {
@@ -50,7 +62,7 @@ function PostID({ post, comments }) {
 	};
 
 	return (
-		<div className='relative top-20'>
+		<div className='relative top-20 pb-20'>
 			<Head>
 				<title>Code Chronicles | Blog Post</title>
 				<meta name='description' content='A blog post for Code Chronicles' />
@@ -77,21 +89,30 @@ function PostID({ post, comments }) {
 					</div>
 				</motion.div>
 			</div>
-			<section className='relative top-20'>
-				<AddComment />
+			{/* ----------> Comments Section <---------- */}
+			<section className='relative top-16'>
+				<AddComment postID={post.id} status={status} session={session} />
 				<motion.div
 					className='pb-8'
 					variants={list}
 					initial='hidden'
 					animate='visible'
+					viewport={{ once: true }}
 				>
-					<h3 className='text-center relative top-16'>Comments</h3>
-
-					{comments.map(comment => (
-						<motion.div key={comment.comment_id} variants={item}>
-							<UserComment comment={comment} />
-						</motion.div>
-					))}
+					<h3 className='text-center relative top-14'>Comments</h3>
+					{comments.length < 1 ? (
+						<p className='relative top-16 italic text-center mt-4'>
+							No comments have been made yet
+						</p>
+					) : (
+						<>
+							{comments.map(comment => (
+								<motion.div key={comment.comment_id} variants={item}>
+									<UserComment comment={comment} />
+								</motion.div>
+							))}
+						</>
+					)}
 				</motion.div>
 			</section>
 		</div>

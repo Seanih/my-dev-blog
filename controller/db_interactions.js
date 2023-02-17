@@ -171,10 +171,11 @@ export const addCommentToBlogPost = async (req, res) => {
 			]);
 
 			res.status(201).json({ success: 'you successfully made a comment!' });
-
-			client.end();
 		} catch (error) {
 			res.status(500).json({ error: error.message });
+		} finally {
+			client.end();
+			poolClient.release();
 		}
 	}
 };
