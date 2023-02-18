@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { marked } from 'marked';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import UserComment from '../../components/UserComment';
 import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
@@ -40,36 +40,15 @@ function PostID({ post, comments }) {
 		}
 	}, [status]);
 
-	const list = {
-		visible: {
-			opacity: 1,
-			transition: {
-				when: 'beforeChildren',
-				staggerChildren: 0.1,
-			},
-		},
-		hidden: {
-			opacity: 0,
-			transition: {
-				when: 'afterChildren',
-			},
-		},
-	};
-
-	const item = {
-		visible: { opacity: 1, x: 0 },
-		hidden: { opacity: 0, x: 100 },
-	};
-
 	return (
-		<div className='relative top-20 pb-20'>
+		<div className='relative top-20 pb-20 m-auto'>
 			<Head>
 				<title>Code Chronicles | Blog Post</title>
 				<meta name='description' content='A blog post for Code Chronicles' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<div className='relative top-8 w-[90%] max-w-[1200px]  m-auto border border-black/40 rounded-xl'>
+			<article className='relative top-8 w-[90%] max-w-[1200px]  m-auto border border-black/40 rounded-xl'>
 				<motion.div
 					initial={{ opacity: 0, x: -75 }}
 					whileInView={{ opacity: 1, x: 0 }}
@@ -84,36 +63,32 @@ function PostID({ post, comments }) {
 					transition={{ duration: 0.3 }}
 					viewport={{ once: true }}
 				>
-					<div className='w-[90%] m-auto mb-8'>
+					<div className='w-[90%] max-w-[1200px] m-auto mb-8'>
 						<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
 					</div>
 				</motion.div>
-			</div>
+			</article>
 			{/* ----------> Comments Section <---------- */}
-			<section className='relative top-16'>
+			<section className='relative top-16 pb-20'>
 				<AddComment postID={post.id} status={status} session={session} />
-				<motion.div
-					className='pb-8'
-					variants={list}
-					initial='hidden'
-					animate='visible'
-					viewport={{ once: true }}
-				>
-					<h3 className='text-center relative top-14'>Comments</h3>
+
+				<div className='pb-8'>
+					{/* ----- Show signIn or allow comments ----- */}
+					<h3 className='relative top-14 text-center'>Comments</h3>
 					{comments.length < 1 ? (
-						<p className='relative top-16 italic text-center mt-4'>
+						<p className=' top-16 italic text-center mt-4'>
 							No comments have been made yet
 						</p>
 					) : (
 						<>
 							{comments.map(comment => (
-								<motion.div key={comment.comment_id} variants={item}>
+								<div key={comment.comment_id}>
 									<UserComment comment={comment} />
-								</motion.div>
+								</div>
 							))}
 						</>
 					)}
-				</motion.div>
+				</div>
 			</section>
 		</div>
 	);

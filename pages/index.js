@@ -79,22 +79,30 @@ export default function Home() {
 								&quot;failed&quot; at something else I wanted to do, and that
 								failure was preventing me from acquiring a lot of what I wanted
 								in my future. Finally, my anger turned into a determination to{' '}
-								<strong>truly</strong> apply myself and push through all of
-								those self-imposed barriers that held me back; I accepted and
-								embraced the fact that what I&apos;m trying to achieve is HARD,
-								and that difficulty is part of what makes this path as rewarding
-								as it is.
+								<strong>truly</strong> apply myself and push through all of the
+								self-imposed barriers that held me back; I accepted and embraced
+								the fact that what I&apos;m trying to achieve is HARD, and that
+								difficulty is part of what makes this path as rewarding as it
+								is.
 							</p>
 							<p>
-								That simple - but powerful - mindset change turned someone who
-								was literally <i>terrified</i> of getting a bug they
-								couldn&apos;t understand into someone who gets excited about the
-								opportunity to learn and solve more complex problems!
+								That simple - but powerful - mindset shift completely changed
+								how I see and approach problems. I was someone who was literally{' '}
+								<i>terrified</i> of getting a bug I couldn&apos;t immediately
+								fix or understand (&quot;
+								<u>Cannot read property &apos;map&apos; of undefined</u>&quot;
+								stopped me from completing <strong>multiple</strong>{' '}
+								tutorials...), but now I&apos;m someone who actually gets
+								excited about learning how to solve new problems, and
+								that&apos;s something I couldn&apos;t even picture just 9 months
+								ago!
 							</p>
 							<p className='mb-0'>
-								This mindset is also what inspired me to create this blog, and
-								that&apos;s because I want to help people who might be
-								experiencing what I went through. This blog will contain:
+								This mindset is also what inspired me to program this blog, and
+								building this application gave me a great opportunity to further
+								hone my skills while simultaneously being able to help people
+								who might be experiencing what I went through. This blog will
+								contain:
 							</p>
 							<ul className='list-disc ml-8 mb-4'>
 								<li>personal stories related to coding</li>
