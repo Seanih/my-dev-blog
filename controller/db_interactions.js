@@ -1,6 +1,6 @@
 import { Client, Pool } from 'pg';
 
-const db_credentials = {
+export const db_credentials = {
 	host: process.env.DB_HOST,
 	database: process.env.DB_NAME,
 	port: process.env.DB_PORT,

@@ -4,41 +4,41 @@ import { motion } from 'framer-motion';
 import UserComment from '../../components/UserComment';
 import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { Pool } from 'pg';
+import { db_credentials } from '../../controller/db_interactions';
 
 export async function getServerSideProps({ params: { id } }) {
-	let response = await fetch(
-		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}`
-	);
+	// get specific post from DB
+	const pool = new Pool(db_credentials);
+	const poolClient = await pool.connect();
+	const postQuery = 'SELECT * FROM posts WHERE id = $1';
+	const postResult = await poolClient.query(postQuery, [id]);
 
-	const blogPost = await response.json();
-	const post = blogPost[0];
+	postResult.rows[0].created_at = postResult.rows[0].created_at.toISOString();
+	postResult.rows[0].updated_at = postResult.rows[0].updated_at.toISOString();
 
-	response = await fetch(
-		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}/comments`
-	);
-	const comments = await response.json();
+	// get post comments from DB
+	const commentsQuery =
+		'SELECT name, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
+	const commentsResult = await poolClient.query(commentsQuery, [id]);
+
+	commentsResult.rows.forEach(comment => {
+		comment.created_at = comment.created_at.toISOString();
+	});
+
+	poolClient.release();
 
 	return {
 		props: {
-			post,
-			comments,
+			post: postResult.rows[0],
+			comments: commentsResult.rows,
 		},
 	};
 }
 
 function PostID({ post, comments }) {
 	const { data: session, status } = useSession();
-	const [userAuthenticated, setUserAuthenticated] = useState(false);
 	const markdownPost = marked(post.post_content);
-
-	useEffect(() => {
-		if (status === 'authenticated') {
-			setUserAuthenticated(true);
-		} else {
-			setUserAuthenticated(false);
-		}
-	}, [status]);
 
 	return (
 		<div className='relative top-20 pb-20 m-auto'>

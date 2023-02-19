@@ -1,30 +1,25 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminNav from '../../../components/AdminNav';
+import { Pool } from 'pg';
+import { db_credentials } from '../../../controller/db_interactions';
+import { useSession } from 'next-auth/react';
 
-export async function getServerSideProps({ params: { id }, context }) {
-	const session = await getSession(context);
+export async function getServerSideProps(context) {
+	const pool = new Pool(db_credentials);
+	const poolClient = await pool.connect();
+	const postQuery = 'SELECT * FROM posts WHERE id = $1';
+	const postResult = await poolClient.query(postQuery, [context.params.id]);
 
-	if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-		return {
-			redirect: {
-				destination: '/sign-in',
-				permanent: false,
-			},
-		};
-	}
+	postResult.rows[0].created_at = postResult.rows[0].created_at.toISOString();
+	postResult.rows[0].updated_at = postResult.rows[0].updated_at.toISOString();
 
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts/${id}`
-	);
-	const blogPost = await response.json();
-	const post = blogPost[0];
+	poolClient.release();
 
 	return {
 		props: {
-			post,
+			post: postResult.rows[0],
 		},
 	};
 }
@@ -32,6 +27,7 @@ export async function getServerSideProps({ params: { id }, context }) {
 function EditSpecificPost({ post }) {
 	const [editedBlogTitle, setEditedBlogTitle] = useState(post.title);
 	const [editedBlogPost, setEditedBlogPost] = useState(post.post_content);
+	const { data: session } = useSession();
 	const router = useRouter();
 
 	const handleEditPost = async e => {
@@ -52,6 +48,12 @@ function EditSpecificPost({ post }) {
 			console.error(error.message);
 		}
 	};
+
+	useEffect(() => {
+		if (session.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+			router.push('/sign-in');
+		}
+	}, [session.user.email, router]);
 
 	return (
 		<div className='relative top-20'>

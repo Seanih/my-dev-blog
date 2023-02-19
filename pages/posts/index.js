@@ -3,23 +3,20 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import PostPreview from '../../components/PostPreview';
 import Link from 'next/link';
+import axios from 'axios';
 
-export async function getServerSideProps(context) {
-	let result, blogPosts;
+function Posts() {
+	const [blogPosts, setBlogPosts] = useState([]);
 
-	try {
-		result = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts`);
-		blogPosts = await result.json();
-
-		return {
-			props: { blogPosts },
+	useEffect(() => {
+		const getPosts = async () => {
+			const { data } = await axios.get('/api/posts');
+			setBlogPosts(data);
 		};
-	} catch (error) {
-		console.error(error.message);
-	}
-}
 
-function Posts({ blogPosts }) {
+		getPosts();
+	}, []);
+
 	// Framer Motion attributes
 	const list = {
 		visible: {

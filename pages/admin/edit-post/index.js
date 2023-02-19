@@ -6,35 +6,9 @@ import PostPreview from '../../../components/PostPreview';
 import AdminNav from '../../../components/AdminNav';
 import Link from 'next/link';
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
 
-export async function getServerSideProps(context) {
-	const session = await getSession(context);
-	let result, blogPosts;
-
-	if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-		return {
-			redirect: {
-				destination: '/sign-in',
-				permanent: false,
-			},
-		};
-	}
-
-	try {
-		result = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/posts`);
-		blogPosts = await result.json();
-
-		return {
-			props: { blogPosts },
-		};
-	} catch (error) {
-		console.error(error.message);
-	}
-}
-
-function Posts({ blogPosts }) {
-	const [allBlogPosts, setAllBlogPosts] = useState([]);
+function Posts() {
+	const [blogPosts, setBlogPosts] = useState([]);
 
 	const handleDeletePost = async post => {
 		try {
@@ -50,10 +24,13 @@ function Posts({ blogPosts }) {
 	};
 
 	useEffect(() => {
-		if (blogPosts.length > 0) {
-			setAllBlogPosts(blogPosts);
-		}
-	}, [blogPosts]);
+		const getPosts = async () => {
+			const { data } = await axios.get('/api/posts');
+			setBlogPosts(data);
+		};
+
+		getPosts();
+	}, []);
 
 	// Framer Motion attributes
 	const list = {
@@ -90,11 +67,11 @@ function Posts({ blogPosts }) {
 
 			<main className='flex flex-col justify-center items-center'>
 				<AdminNav />
-				{allBlogPosts.length < 1 ? (
+				{blogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
 					<motion.div variants={list} initial='hidden' animate='visible'>
-						{allBlogPosts.map(post => (
+						{blogPosts.map(post => (
 							<motion.div className='relative' key={post.id} variants={item}>
 								<AiFillDelete
 									className='absolute left-[-2rem] top-1/2 hover:cursor-pointer hover:scale-125'
