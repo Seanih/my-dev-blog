@@ -44,9 +44,12 @@ html {
 
 * {
 	box-sizing: border-box;
-
 }
 
 p {
 	margin-bottom: 1rem;
+}
+
+ol {
+	list-style-type: decimal;
 }

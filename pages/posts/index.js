@@ -51,6 +51,7 @@ function Posts() {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
+				<h1 className='mt-8'>Blog Posts</h1>
 				{blogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
