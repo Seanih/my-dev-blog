@@ -47,7 +47,7 @@ function CreatePost() {
 				className='flex flex-col w-[70%] m-auto py-2'
 				onSubmit={handleSubmitPost}
 			>
-				<div>
+				<div className='my-4'>
 					<label className='block' htmlFor='title'>
 						Title:{' '}
 					</label>

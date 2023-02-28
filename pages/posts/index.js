@@ -11,7 +11,13 @@ function Posts() {
 	useEffect(() => {
 		const getPosts = async () => {
 			const { data } = await axios.get('/api/posts');
-			setBlogPosts(data);
+			try {
+				if (data) {
+					setBlogPosts(data);
+				}
+			} catch (error) {
+				console.error(error.message);
+			}
 		};
 
 		getPosts();
@@ -51,7 +57,7 @@ function Posts() {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
-				<h1 className='mt-8'>Blog Posts</h1>
+				<h1 className='my-8'>Blog Posts</h1>
 				{blogPosts.length < 1 ? (
 					<p>no blog posts</p>
 				) : (
