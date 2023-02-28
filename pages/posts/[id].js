@@ -5,11 +5,12 @@ import UserComment from '../../components/UserComment';
 import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
 import { Pool } from 'pg';
-import { db_credentials } from '../../controller/db_interactions';
+import { aws_db_credentials } from '../../controller/db_interactions';
+// import { db_credentials } from '../../controller/db_interactions';
 
 export async function getServerSideProps({ params: { id } }) {
 	// get specific post from DB
-	const pool = new Pool(db_credentials);
+	const pool = new Pool(aws_db_credentials);
 	const poolClient = await pool.connect();
 	const postQuery = 'SELECT * FROM posts WHERE id = $1';
 	const postResult = await poolClient.query(postQuery, [id]);
@@ -73,7 +74,6 @@ function PostID({ post, comments }) {
 				<AddComment postID={post.id} status={status} session={session} />
 
 				<div className='pb-8'>
-					{/* ----- Show signIn or allow comments ----- */}
 					<h3 className='relative top-14 text-center'>Comments</h3>
 					{comments.length < 1 ? (
 						<p className=' top-16 italic text-center mt-4'>

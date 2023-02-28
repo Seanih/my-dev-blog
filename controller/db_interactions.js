@@ -8,9 +8,17 @@ export const db_credentials = {
 	password: process.env.DB_PASSWORD,
 };
 
-const client = new Client(db_credentials);
+export const aws_db_credentials = {
+	host: process.env.AWS_DB_HOST,
+	database: process.env.AWS_DB_NAME,
+	port: process.env.AWS_DB_PORT,
+	user: process.env.AWS_DB_USER,
+	password: process.env.AWS_DB_PASSWORD,
+};
 
-const pool = new Pool(db_credentials);
+const client = new Client(aws_db_credentials);
+
+const pool = new Pool(aws_db_credentials);
 
 export const getAllPosts = async res => {
 	const poolClient = await pool.connect();
