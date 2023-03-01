@@ -22,7 +22,7 @@ function AddComment({ postID, status, session }) {
 	};
 
 	return (
-		<div className='rounded-lg w-[80%] max-w-[800px] m-auto bg-gradient-to-br from-slate-200 to-slate-500'>
+		<div className='m-auto mt-10 rounded-lg w-[80%] max-w-[800px] bg-gradient-to-br from-slate-200 to-slate-500'>
 			<form className='flex flex-col py-8' onSubmit={handleSubmitComment}>
 				{status === 'authenticated' ? (
 					<>

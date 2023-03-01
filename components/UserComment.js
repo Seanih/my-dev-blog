@@ -28,7 +28,7 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 	}, [created_at]);
 
 	return (
-		<div className='relative top-20 w-[80%] max-w-[800px] m-auto border border-black/40 rounded-xl mb-4'>
+		<div className='w-[80%] max-w-[800px] m-auto border border-black/40 rounded-xl mb-4'>
 			<div className='w-[90%] m-auto py-8'>
 				<div className='flex flex-wrap justify-between w-4/5 m-auto mb-2 text-sm'>
 					<div className='text-sm font-bold'>

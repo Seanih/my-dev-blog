@@ -161,8 +161,6 @@ export const addCommentToBlogPost = async (req, res) => {
 				req.body.userEmail,
 			]);
 
-			client.end();
-
 			// add comment with new user info
 			const getCommenterID = await poolClient.query(checkUserQuery, [
 				req.body.userEmail,
@@ -183,7 +181,6 @@ export const addCommentToBlogPost = async (req, res) => {
 			res.status(500).json({ error: error.message });
 		} finally {
 			client.end();
-			poolClient.release();
 		}
 	}
 };
@@ -200,5 +197,7 @@ export const getPostComments = async (req, res) => {
 	} catch (error) {
 		console.error(error.message);
 		res.status(500).json({ error: error.message });
+	} finally {
+		poolClient.release();
 	}
 };

@@ -42,54 +42,57 @@ function PostID({ post, comments }) {
 	const markdownPost = marked(post.post_content);
 
 	return (
-		<div className='relative top-20 pb-20 m-auto'>
+		<div className='relative top-20 m-auto'>
 			<Head>
 				<title>Code Chronicles | Blog Post</title>
 				<meta name='description' content='A blog post for Code Chronicles' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<article className='relative top-8 w-[90%] max-w-[1200px]  m-auto border border-black/40 rounded-xl'>
-				<motion.div
-					initial={{ opacity: 0, x: -75 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.3 }}
-					viewport={{ once: true }}
-				>
-					<h1 className='pt-8 mb-12 text-center'>{post.title}</h1>
-				</motion.div>
-				<motion.div
-					initial={{ opacity: 0, x: 75 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.3 }}
-					viewport={{ once: true }}
-				>
-					<div className='w-[90%] max-w-[1200px] m-auto mb-8'>
-						<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
-					</div>
-				</motion.div>
-			</article>
-			{/* ----------> Comments Section <---------- */}
-			<section className='relative top-16 pb-20'>
-				<AddComment postID={post.id} status={status} session={session} />
+			<div className='pt-8'>
+				<article className='w-[90%] max-w-[1200px] m-auto border border-black/40 rounded-xl'>
+					<motion.div
+						initial={{ opacity: 0, x: -75 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.3 }}
+						viewport={{ once: true }}
+					>
+						<h1 className='pt-8 mb-12 text-center'>{post.title}</h1>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, x: 75 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.3 }}
+						viewport={{ once: true }}
+					>
+						<div className='w-[90%] max-w-[1200px] m-auto mb-8'>
+							<div dangerouslySetInnerHTML={{ __html: markdownPost }} />
+						</div>
+					</motion.div>
+				</article>
 
-				<div className='pb-8'>
-					<h3 className='relative top-14 text-center'>Comments</h3>
-					{comments.length < 1 ? (
-						<p className=' top-16 italic text-center mt-4'>
-							No comments have been made yet
-						</p>
-					) : (
-						<>
-							{comments.map(comment => (
-								<div key={comment.comment_id}>
-									<UserComment comment={comment} />
-								</div>
-							))}
-						</>
-					)}
-				</div>
-			</section>
+				{/* ----------> Comments Section <---------- */}
+				<section>
+					<AddComment postID={post.id} status={status} session={session} />
+
+					<div className='mt-8'>
+						<h3 className='text-center mb-4'>Comments</h3>
+						{comments.length < 1 ? (
+							<p className='italic text-center'>
+								No comments have been made yet
+							</p>
+						) : (
+							<>
+								{comments.map(comment => (
+									<div key={comment.comment_id}>
+										<UserComment comment={comment} />
+									</div>
+								))}
+							</>
+						)}
+					</div>
+				</section>
+			</div>
 		</div>
 	);
 }
