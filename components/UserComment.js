@@ -48,14 +48,20 @@ function UserComment({
 				<div className='bg-white rounded-xl p-4'>{comment_text}</div>
 				{/* DELETE or EDIT comment */}
 				{userEmail === email && (
-					<ul className='flex mt-4'>
-						<li className='mr-8 hover:text-sky-700 hover:font-semibold hover:underline hover:cursor-pointer'>
+					<div className='flex mt-4'>
+						<button
+							className='mr-4 border border-black px-4 rounded-md bg-sky-700 text-white hover:bg-sky-600 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-150'
+							type='button'
+						>
 							edit
-						</li>
-						<li className='hover:text-sky-700 hover:font-semibold hover:underline hover:cursor-pointer'>
+						</button>
+						<button
+							className='border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-150'
+							type='button'
+						>
 							delete
-						</li>
-					</ul>
+						</button>
+					</div>
 				)}
 			</div>
 		</div>
