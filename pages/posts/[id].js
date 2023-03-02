@@ -6,7 +6,6 @@ import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
 import { Pool } from 'pg';
 import { aws_db_credentials } from '../../controller/db_interactions';
-// import { db_credentials } from '../../controller/db_interactions';
 
 export async function getServerSideProps({ params: { id } }) {
 	// get specific post from DB
@@ -20,7 +19,7 @@ export async function getServerSideProps({ params: { id } }) {
 
 	// get post comments from DB
 	const commentsQuery =
-		'SELECT name, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
+		'SELECT name, email, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
 	const commentsResult = await poolClient.query(commentsQuery, [id]);
 
 	commentsResult.rows.forEach(comment => {
@@ -85,7 +84,10 @@ function PostID({ post, comments }) {
 							<>
 								{comments.map(comment => (
 									<div key={comment.comment_id}>
-										<UserComment comment={comment} />
+										<UserComment
+											comment={comment}
+											userEmail={session?.user.email}
+										/>
 									</div>
 								))}
 							</>

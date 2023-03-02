@@ -50,7 +50,7 @@ export default function Home() {
 							<p>
 								<span className='text-lg font-bold'>This is how it felt</span>{' '}
 								when things finally clicked a few months ago and I was able to
-								wrap my head around full-stack development.
+								wrap my head around fullstack development.
 							</p>
 							<p>
 								Like most people who try to learn web development, my goal was
@@ -91,7 +91,7 @@ export default function Home() {
 								<i>terrified</i> of getting a bug I couldn&apos;t immediately
 								fix or understand (&quot;
 								<u>Cannot read property &apos;map&apos; of undefined</u>&quot;
-								stopped me from completing <strong>multiple</strong>{' '}
+								stopped me from completing <strong>too many</strong>{' '}
 								tutorials...), but now I&apos;m someone who actually gets
 								excited about learning how to solve new problems, and
 								that&apos;s something I couldn&apos;t even picture just 9 months
@@ -99,10 +99,9 @@ export default function Home() {
 							</p>
 							<p className='mb-0'>
 								This mindset is also what inspired me to program this blog, and
-								building this application gave me a great opportunity to further
-								hone my skills while simultaneously being able to help people
-								who might be experiencing what I went through. This blog will
-								contain:
+								building this application gave me a great opportunity to hone my
+								skills while also being able to help people who might be
+								experiencing what I went through. This blog will contain:
 							</p>
 							<ul className='list-disc ml-8 mb-4'>
 								<li>personal stories related to coding</li>

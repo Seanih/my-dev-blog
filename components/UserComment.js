@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
-function UserComment({ comment: { name, comment_text, created_at } }) {
+function UserComment({
+	userEmail,
+	comment: { name, email, comment_text, created_at },
+}) {
 	const [datePosted, setDatePosted] = useState('');
 	// capitalize the first letters of the user's names
 	const formattedName = user_name => {
@@ -29,9 +32,9 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 
 	return (
 		<div className='w-[80%] max-w-[800px] m-auto border border-black/40 rounded-xl mb-4'>
-			<div className='w-[90%] m-auto py-8'>
-				<div className='flex flex-wrap justify-between w-4/5 m-auto mb-2 text-sm'>
-					<div className='text-sm font-bold'>
+			<div className='w-[90%] m-auto py-4'>
+				<div className='flex flex-wrap justify-between items-center w-4/5 m-auto mb-2 text-sm'>
+					<div className='text-sm font-bold mr-4'>
 						Name:{' '}
 						<span className='ml-2 text-base font-normal italic'>
 							{formattedName(name)}
@@ -43,6 +46,17 @@ function UserComment({ comment: { name, comment_text, created_at } }) {
 					</div>
 				</div>
 				<div className='bg-white rounded-xl p-4'>{comment_text}</div>
+				{/* DELETE or EDIT comment */}
+				{userEmail === email && (
+					<ul className='flex mt-4'>
+						<li className='mr-8 hover:text-sky-700 hover:font-semibold hover:underline hover:cursor-pointer'>
+							edit
+						</li>
+						<li className='hover:text-sky-700 hover:font-semibold hover:underline hover:cursor-pointer'>
+							delete
+						</li>
+					</ul>
+				)}
 			</div>
 		</div>
 	);

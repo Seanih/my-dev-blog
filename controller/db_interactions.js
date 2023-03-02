@@ -1,13 +1,5 @@
 import { Client, Pool } from 'pg';
 
-export const db_credentials = {
-	host: process.env.DB_HOST,
-	database: process.env.DB_NAME,
-	port: process.env.DB_PORT,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD,
-};
-
 export const aws_db_credentials = {
 	host: process.env.AWS_DB_HOST,
 	database: process.env.AWS_DB_NAME,
@@ -166,6 +158,7 @@ export const addCommentToBlogPost = async (req, res) => {
 				req.body.userEmail,
 			]);
 			const commenterID = getCommenterID.rows[0].id;
+
 			poolClient.release();
 
 			await client.connect();

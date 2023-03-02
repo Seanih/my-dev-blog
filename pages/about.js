@@ -24,7 +24,8 @@ function About() {
 							</i>
 						</p>
 						<p>
-							Hey! My name is Sean, and I'm excited to say that I'm a full-stack{' '}
+							Hey! My name is Sean, and I'm excited to say that I'm a
+							self-taught fullstack{' '}
 							<span className='italic font-bold'>and </span>
 							blockchain developer. My professional background includes time in
 							customer service, working in the mortgage industry, as well as 12
@@ -139,9 +140,9 @@ function About() {
 							solve bigger and more complex problems.
 						</p>
 						<p>
-							Once I became comfortable with the fundamentals of full-stack
+							Once I became comfortable with the fundamentals of fullstack
 							blockchain development, I knew I would be able learn off-chain
-							full-stack as well. I started by learning how to interact with
+							fullstack as well. I started by learning how to interact with
 							NoSQL databases, and once I understood that I moved on to SQL
 							databases, so now I feel comfortable working with both. I have a
 							significantly better understanding of programming and how data
