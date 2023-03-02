@@ -5,6 +5,9 @@ function UserComment({
 	comment: { name, email, comment_text, created_at },
 }) {
 	const [datePosted, setDatePosted] = useState('');
+	const [isEditingComment, setIsEditingComment] = useState(false);
+	const [editedComment, setEditedComment] = useState(comment_text);
+
 	// capitalize the first letters of the user's names
 	const formattedName = user_name => {
 		let fixedName;
@@ -24,6 +27,8 @@ function UserComment({
 
 		return fixedName;
 	};
+
+	const handleSubmitEditedComment = () => {};
 
 	// prevents hydration errors
 	useEffect(() => {
@@ -45,22 +50,58 @@ function UserComment({
 						<span className='italic ml-2 font-normal'>{datePosted}</span>
 					</div>
 				</div>
-				<div className='bg-white rounded-xl p-4'>{comment_text}</div>
+				{isEditingComment && userEmail === email ? (
+					<form>
+						<textarea
+							className='border border-black/40 rounded-xl w-full px-4 py-2'
+							name='edited_comment'
+							id='edited_comment'
+							autoFocus
+							value={editedComment}
+							placeholder={comment_text}
+							onChange={e => setEditedComment(e.target.value)}
+							required
+						/>
+					</form>
+				) : (
+					<div className='bg-white rounded-xl p-4'>{comment_text}</div>
+				)}
 				{/* DELETE or EDIT comment */}
 				{userEmail === email && (
 					<div className='flex mt-4'>
-						<button
-							className='mr-4 border border-black px-4 rounded-md bg-sky-700 text-white hover:bg-sky-600 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-150'
-							type='button'
-						>
-							edit
-						</button>
-						<button
-							className='border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-150'
-							type='button'
-						>
-							delete
-						</button>
+						{isEditingComment ? (
+							<>
+								<button
+									className='mr-4 border border-black px-4 rounded-md bg-sky-700 text-white hover:bg-sky-600 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+									type='button'
+								>
+									Confirm
+								</button>
+								<button
+									className='border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+									type='button'
+									onClick={() => setIsEditingComment(false)}
+								>
+									Cancel
+								</button>
+							</>
+						) : (
+							<>
+								<button
+									className='mr-4 border border-black px-4 rounded-md bg-sky-700 text-white hover:bg-sky-600 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+									type='button'
+									onClick={() => setIsEditingComment(true)}
+								>
+									edit
+								</button>
+								<button
+									className='border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+									type='button'
+								>
+									delete
+								</button>
+							</>
+						)}
 					</div>
 				)}
 			</div>
