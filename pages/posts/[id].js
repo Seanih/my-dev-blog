@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { marked } from 'marked';
 import { motion } from 'framer-motion';
 import UserComment from '../../components/UserComment';
@@ -6,6 +7,7 @@ import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
 import { Pool } from 'pg';
 import { aws_db_credentials } from '../../controller/db_interactions';
+import DeleteModal from '../../components/DeleteModal';
 
 export async function getServerSideProps({ params: { id } }) {
 	// get specific post from DB
@@ -56,7 +58,7 @@ function PostID({ post, comments }) {
 						transition={{ duration: 0.3 }}
 						viewport={{ once: true }}
 					>
-						<h1 className='pt-8 mb-12 text-center'>{post.title}</h1>
+						<h1 className='pt-8 mb-8 text-center'>{post.title}</h1>
 					</motion.div>
 					<motion.div
 						initial={{ opacity: 0, x: 75 }}
@@ -85,6 +87,7 @@ function PostID({ post, comments }) {
 								{comments.map(comment => (
 									<div key={comment.comment_id}>
 										<UserComment
+											postID={post.id}
 											comment={comment}
 											userEmail={session?.user.email}
 										/>

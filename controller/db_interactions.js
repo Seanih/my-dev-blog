@@ -21,7 +21,7 @@ export const getAllPosts = async res => {
 
 		res.status(200).json(result.rows);
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
 	} finally {
 		poolClient.release();
 	}
@@ -36,9 +36,9 @@ export const createPost = async (req, res) => {
 		await client.connect();
 		await client.query(sqlQuery, values);
 
-		res.status(200).json({ success: 'blog entry was added!' });
+		res.status(201).json({ success: 'blog entry was added!' });
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
 	} finally {
 		client.end();
 	}
@@ -49,12 +49,11 @@ export const getSpecificPost = async (req, res) => {
 
 	try {
 		const sqlQuery = 'SELECT * FROM posts WHERE id = $1';
-
 		const result = await poolClient.query(sqlQuery, [req.query.post_id]);
 
 		res.status(200).json(result.rows);
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
 	} finally {
 		poolClient.release();
 	}
@@ -86,7 +85,7 @@ export const modifyPost = async (req, res) => {
 
 		res.status(200).json({ success: 'you made the update!' });
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
 	} finally {
 		client.end();
 	}
@@ -99,9 +98,9 @@ export const deletePost = async (req, res) => {
 		await client.connect();
 		await client.query(sqlQuery, [req.query.post_id]);
 
-		res.status(200).json({ success: 'deleted post!' });
+		res.status(200).json('deleted post');
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
 	} finally {
 		client.end();
 	}
@@ -139,7 +138,7 @@ export const addCommentToBlogPost = async (req, res) => {
 
 			res.status(201).json({ success: 'you successfully made a comment!' });
 		} catch (error) {
-			res.status(500).json({ error: error.message });
+			res.status(400).json({ error: error.message });
 		} finally {
 			client.end();
 		}
@@ -147,12 +146,12 @@ export const addCommentToBlogPost = async (req, res) => {
 		// create user if non-existent
 		try {
 			await client.connect();
-
 			await client.query(addCommenterQuery, [
 				req.body.userName,
 				req.body.userEmail,
 			]);
 
+			client.end();
 			// add comment with new user info
 			const getCommenterID = await poolClient.query(checkUserQuery, [
 				req.body.userEmail,
@@ -162,7 +161,6 @@ export const addCommentToBlogPost = async (req, res) => {
 			poolClient.release();
 
 			await client.connect();
-
 			await client.query(addCommentToPostQuery, [
 				commenterID,
 				req.query.post_id,
@@ -171,7 +169,7 @@ export const addCommentToBlogPost = async (req, res) => {
 
 			res.status(201).json({ success: 'you successfully made a comment!' });
 		} catch (error) {
-			res.status(500).json({ error: error.message });
+			res.status(400).json({ error: error.message });
 		} finally {
 			client.end();
 		}
@@ -188,8 +186,24 @@ export const getPostComments = async (req, res) => {
 
 		res.status(200).json(result.rows);
 	} catch (error) {
-		console.error(error.message);
-		res.status(500).json({ error: error.message });
+		res.status(400).json({ error: error.message });
+	} finally {
+		poolClient.release();
+	}
+};
+
+export const deleteComment = async (req, res) => {
+	const sqlQuery =
+		'DELETE FROM comments WHERE post_id = $1 AND comment_id = $2';
+	const { post_id, comment_id } = req.body;
+	const poolClient = await pool.connect();
+
+	try {
+		await poolClient.query(sqlQuery, [post_id, comment_id]);
+
+		res.status(200).json('deleted comment');
+	} catch (error) {
+		res.status(400).json({ error: error.message });
 	} finally {
 		poolClient.release();
 	}

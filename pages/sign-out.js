@@ -28,7 +28,7 @@ function SignOut({ user }) {
 			<div
 				className={`h-[calc(100vh-80px)] max-w-[1200px] m-auto flex flex-col items-center justify-center`}
 			>
-				<div className='border border-black rounded-xl h-1/2 w-1/2 flex flex-col justify-center items-center bg-slate-600 text-white'>
+				<div className='border border-black rounded-xl p-16 flex flex-col justify-center items-center bg-slate-600 text-white'>
 					<p>
 						Thanks for stopping by, {user.name.split(' ')[0]}! See you next
 						time.
