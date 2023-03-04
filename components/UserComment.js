@@ -32,8 +32,19 @@ function UserComment({
 		return fixedName;
 	};
 
-	const handleSubmitEditedComment = e => {
+	const handleEditComment = async e => {
 		e.preventDefault();
+
+		try {
+			await axios.patch(`/api/posts/${postID}/comments`, {
+				comment_id,
+				editedComment,
+			});
+
+			window.location.reload();
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	const handleDeleteComment = async () => {
@@ -104,7 +115,7 @@ function UserComment({
 									<button
 										className='border border-black px-4 rounded-md bg-green-600 text-white hover:bg-green-500 hover:text-black hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
 										type='submit'
-										onClick={handleSubmitEditedComment}
+										onClick={handleEditComment}
 									>
 										Confirm
 									</button>

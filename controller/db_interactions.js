@@ -60,36 +60,51 @@ export const getSpecificPost = async (req, res) => {
 };
 
 export const modifyPost = async (req, res) => {
+	const queryValues = [
+		req.query.post_id,
+		req.body.title,
+		req.body.post_content,
+	];
+
+	const sqlQuery =
+		'UPDATE posts SET title = $2, post_content = $3 WHERE id = $1';
+
 	try {
-		// make post_id first item in the query array
-		const queryValues = [req.query.post_id];
-
-		//* <--------- Query with multiple params --------->
-		// 1) start query string
-		let sqlQuery = `UPDATE posts SET `;
-
-		// 2) dynamically retrieve key value pairs from req.body and add to query string
-		let i = 2;
-		Object.entries(req.body).forEach(([key, value]) => {
-			sqlQuery += `${key} = $${i}, `;
-			queryValues.push(value);
-			i++;
-		});
-
-		// 3) complete the query string
-		sqlQuery += `updated_at = NOW() WHERE id = $1`;
-		//* <--------- Query with multiple params --------->
-
 		await client.connect();
 		await client.query(sqlQuery, queryValues);
 
 		res.status(200).json({ success: 'you made the update!' });
 	} catch (error) {
+		console.error(error.message);
 		res.status(400).json({ error: error.message });
 	} finally {
 		client.end();
 	}
 };
+
+export async function modifyComment(req, res) {
+	const poolClient = await pool.connect();
+
+	let queryValues = [
+		req.query.post_id,
+		req.body.comment_id,
+		req.body.editedComment,
+	];
+
+	let sqlQuery =
+		'UPDATE comments SET comment_text = $3 WHERE post_id = $1 AND comment_id = $2';
+
+	try {
+		await poolClient.query(sqlQuery, queryValues);
+
+		res.status(200).json('successfully updated comment');
+	} catch (error) {
+		console.error(error.message);
+		res.status(400).json(error.message);
+	} finally {
+		poolClient.release();
+	}
+}
 
 export const deletePost = async (req, res) => {
 	try {
@@ -122,15 +137,12 @@ export const addCommentToBlogPost = async (req, res) => {
 		]);
 	} catch (error) {
 		console.error(error.message);
-	} finally {
-		poolClient.release();
 	}
 
 	// add comment if user is found
 	if (doesUserExist?.rowCount) {
 		try {
-			await client.connect();
-			await client.query(addCommentToPostQuery, [
+			await poolClient.query(addCommentToPostQuery, [
 				doesUserExist.rows[0].id,
 				req.query.post_id,
 				req.body.comment_text,
@@ -140,28 +152,23 @@ export const addCommentToBlogPost = async (req, res) => {
 		} catch (error) {
 			res.status(400).json({ error: error.message });
 		} finally {
-			client.end();
+			poolClient.release();
 		}
 	} else {
 		// create user if non-existent
 		try {
-			await client.connect();
-			await client.query(addCommenterQuery, [
+			await poolClient.query(addCommenterQuery, [
 				req.body.userName,
 				req.body.userEmail,
 			]);
 
-			client.end();
 			// add comment with new user info
 			const getCommenterID = await poolClient.query(checkUserQuery, [
 				req.body.userEmail,
 			]);
 			const commenterID = getCommenterID.rows[0].id;
 
-			poolClient.release();
-
-			await client.connect();
-			await client.query(addCommentToPostQuery, [
+			await poolClient.query(addCommentToPostQuery, [
 				commenterID,
 				req.query.post_id,
 				req.body.comment_text,
@@ -171,7 +178,7 @@ export const addCommentToBlogPost = async (req, res) => {
 		} catch (error) {
 			res.status(400).json({ error: error.message });
 		} finally {
-			client.end();
+			poolClient.release();
 		}
 	}
 };

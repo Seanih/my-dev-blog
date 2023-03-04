@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import AdminNav from '../../../components/AdminNav';
 import { Pool } from 'pg';
-import { db_credentials } from '../../../controller/db_interactions';
+import { aws_db_credentials } from '../../../controller/db_interactions';
 import { useSession } from 'next-auth/react';
 
 export async function getServerSideProps(context) {
-	const pool = new Pool(db_credentials);
+	const pool = new Pool(aws_db_credentials);
 	const poolClient = await pool.connect();
 	const postQuery = 'SELECT * FROM posts WHERE id = $1';
 	const postResult = await poolClient.query(postQuery, [context.params.id]);
@@ -50,10 +50,10 @@ function EditSpecificPost({ post }) {
 	};
 
 	useEffect(() => {
-		if (session.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+		if (session?.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
 			router.push('/sign-in');
 		}
-	}, [session.user.email, router]);
+	}, [session?.user.email, router]);
 
 	return (
 		<div className='relative top-20'>

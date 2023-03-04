@@ -7,7 +7,6 @@ import AddComment from '../../components/AddComment';
 import { useSession } from 'next-auth/react';
 import { Pool } from 'pg';
 import { aws_db_credentials } from '../../controller/db_interactions';
-import DeleteModal from '../../components/DeleteModal';
 
 export async function getServerSideProps({ params: { id } }) {
 	// get specific post from DB

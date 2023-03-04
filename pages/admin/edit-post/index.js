@@ -74,7 +74,7 @@ function Posts() {
 						{blogPosts.map(post => (
 							<motion.div className='relative group' key={post.id} variants={item}>
 								<AiFillDelete
-									className='absolute left-[0.5rem] md:left-0 top-1/2 hover:cursor-pointer hover:scale-125'
+									className='absolute left-[0.5rem] top-1/2 hover:cursor-pointer hover:scale-125'
 									onClick={() => {
 										handleDeletePost(post);
 									}}
