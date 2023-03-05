@@ -82,6 +82,37 @@ export const modifyPost = async (req, res) => {
 	}
 };
 
+export const deletePost = async (req, res) => {
+	try {
+		const sqlQuery = 'DELETE FROM posts WHERE id = $1';
+
+		await client.connect();
+		await client.query(sqlQuery, [req.query.post_id]);
+
+		res.status(200).json('deleted post');
+	} catch (error) {
+		res.status(400).json({ error: error.message });
+	} finally {
+		client.end();
+	}
+};
+
+export const getPostComments = async (req, res) => {
+	const poolClient = await pool.connect();
+	try {
+		const sqlQuery =
+			'SELECT name, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
+
+		let result = await poolClient.query(sqlQuery, [req.query.post_id]);
+
+		res.status(200).json(result.rows);
+	} catch (error) {
+		res.status(400).json({ error: error.message });
+	} finally {
+		poolClient.release();
+	}
+};
+
 export async function modifyComment(req, res) {
 	const poolClient = await pool.connect();
 
@@ -106,18 +137,20 @@ export async function modifyComment(req, res) {
 	}
 }
 
-export const deletePost = async (req, res) => {
+export const deleteComment = async (req, res) => {
+	const sqlQuery =
+		'DELETE FROM comments WHERE post_id = $1 AND comment_id = $2';
+	const { post_id, comment_id } = req.body;
+	const poolClient = await pool.connect();
+
 	try {
-		const sqlQuery = 'DELETE FROM posts WHERE id = $1';
+		await poolClient.query(sqlQuery, [post_id, comment_id]);
 
-		await client.connect();
-		await client.query(sqlQuery, [req.query.post_id]);
-
-		res.status(200).json('deleted post');
+		res.status(200).json('deleted comment');
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	} finally {
-		client.end();
+		poolClient.release();
 	}
 };
 
@@ -180,38 +213,5 @@ export const addCommentToBlogPost = async (req, res) => {
 		} finally {
 			poolClient.release();
 		}
-	}
-};
-
-export const getPostComments = async (req, res) => {
-	const poolClient = await pool.connect();
-	try {
-		const sqlQuery =
-			'SELECT name, post_id, comments.comment_id, comment_text, created_at FROM commenters JOIN comments ON commenters.id = comments.commenter_id WHERE post_id = $1 ORDER BY created_at DESC';
-
-		let result = await poolClient.query(sqlQuery, [req.query.post_id]);
-
-		res.status(200).json(result.rows);
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	} finally {
-		poolClient.release();
-	}
-};
-
-export const deleteComment = async (req, res) => {
-	const sqlQuery =
-		'DELETE FROM comments WHERE post_id = $1 AND comment_id = $2';
-	const { post_id, comment_id } = req.body;
-	const poolClient = await pool.connect();
-
-	try {
-		await poolClient.query(sqlQuery, [post_id, comment_id]);
-
-		res.status(200).json('deleted comment');
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	} finally {
-		poolClient.release();
 	}
 };

@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-no-target-blank */
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { BsPersonLinesFill } from 'react-icons/bs';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
 import logo from '/public/blue-logo.png';
 import { useSession } from 'next-auth/react';
@@ -175,22 +175,28 @@ function Navbar() {
 					</ul>
 					{/* ---------- social media links ---------- */}
 					<div className='pt-40'>
-						<p className='uppercase tracking-widest text-[#5651e5]'>
-							Let&apos;s Connect
+						<p className='uppercase font-bold tracking-widest text-sky-700'>
+							Let&apos;s Talk!
 						</p>
 						<div className='flex item-center justify-between my-4 w-full sm:w-[80%]'>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
-								<FaLinkedinIn />
-							</div>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
-								<FaGithub />
-							</div>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
-								<AiOutlineMail />
-							</div>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-100'>
-								<BsPersonLinesFill />
-							</div>
+							<a
+								href='https://www.linkedin.com/in/sean-anih-86a425268/'
+								target='_blank'
+							>
+								<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+									<FaLinkedinIn />
+								</div>
+							</a>
+							<a href='https://twitter.com/fullstack_sean' target='_blank'>
+								<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+									<FaTwitter />
+								</div>
+							</a>
+							<a href='https://github.com/Seanih' target='_blank'>
+								<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+									<FaGithub />
+								</div>
+							</a>
 						</div>
 					</div>
 				</div>

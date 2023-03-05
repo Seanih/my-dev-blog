@@ -40,6 +40,8 @@ export async function getServerSideProps({ params: { id } }) {
 function PostID({ post, comments }) {
 	const { data: session, status } = useSession();
 	const markdownPost = marked(post.post_content);
+	const date = new Date(post.created_at).toLocaleString();
+	const formattedDate = date.split(',')[0];
 
 	return (
 		<div className='relative top-20 m-auto'>
@@ -57,7 +59,11 @@ function PostID({ post, comments }) {
 						transition={{ duration: 0.3 }}
 						viewport={{ once: true }}
 					>
-						<h1 className='pt-8 mb-8 text-center'>{post.title}</h1>
+						<h1 className='pt-8 text-center'>{post.title}</h1>
+						<div className='text-center mt-2 mb-8 italic text-sm'>
+							<span className='mr-2'>Posted:</span>
+							{formattedDate}
+						</div>
 					</motion.div>
 					<motion.div
 						initial={{ opacity: 0, x: 75 }}

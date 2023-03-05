@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-no-target-blank */
 import Head from 'next/head';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
 function Contact() {
 	const [name, setName] = useState('');
@@ -62,11 +64,45 @@ function Contact() {
 			</Head>
 
 			<main className='flex flex-col justify-center items-center'>
+				<div className='w-full flex flex-col items-center'>
+					<h3 className='my-4 group-hover:text-sky-700'>My Socials</h3>
+					<div className='flex item-center justify-between w-3/5 sm:w-1/2 max-w-lg py-4 px-8 rounded-lg shadow-lg hover:scale-105 ease-in duration-200'>
+						<a
+							className='hover:bg-slate-300 rounded-full'
+							href='https://www.linkedin.com/in/sean-anih-86a425268/'
+							target='_blank'
+						>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+								<FaLinkedinIn />
+							</div>
+						</a>
+						<a
+							className='hover:bg-slate-300 rounded-full'
+							href='https://twitter.com/fullstack_sean'
+							target='_blank'
+						>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+								<FaTwitter />
+							</div>
+						</a>
+						<a
+							className='hover:bg-slate-300 rounded-full'
+							href='https://github.com/Seanih'
+							target='_blank'
+						>
+							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+								<FaGithub />
+							</div>
+						</a>
+					</div>
+				</div>
+
 				<form
 					className='flex flex-col mt-8 w-4/5 sm:w-3/4 max-w-3xl'
 					ref={formRef}
 					onSubmit={handleSendMessage}
 				>
+					<h3 className='text-center mt-4'>Send Me A Message</h3>
 					<div className='mb-4'>
 						<label className='block mb-1' htmlFor='user_name'>
 							Name:{' '}
