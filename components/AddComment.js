@@ -22,7 +22,7 @@ function AddComment({ postID, status, session }) {
 	};
 
 	return (
-		<div className='m-auto mt-10 rounded-lg w-[80%] max-w-[800px] bg-gradient-to-br from-slate-200 to-slate-500'>
+		<div className='m-auto mt-10 rounded-lg w-[80%] max-w-[800px] bg-gradient-to-br from-slate-200 via-slate-500 to-black'>
 			<form className='flex flex-col py-8' onSubmit={handleSubmitComment}>
 				{status === 'authenticated' ? (
 					<>
@@ -43,14 +43,14 @@ function AddComment({ postID, status, session }) {
 						</div>
 						<button
 							type='submit'
-							className='border border-black w-1/2 px-8 py-4 m-auto rounded-xl text-white bg-green-600 hover:text-black hover:bg-green-400'
+							className='border border-black w-1/2 px-8 py-4 m-auto rounded-xl text-white font-semibold bg-sky-600 hover:text-black hover:bg-sky-500'
 						>
 							Add Comment
 						</button>
 					</>
 				) : (
 					<button
-						className='w-[75%] max-w-[300px] m-auto bg-sky-500 hover:bg-sky-600 text-black hover:text-slate-100 rounded-xl py-4'
+						className='w-[75%] max-w-[300px] m-auto bg-sky-500 text-black font-semibold hover:text-slate-100 rounded-xl py-4'
 						onClick={signIn}
 					>
 						Sign in to leave a comment

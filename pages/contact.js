@@ -65,7 +65,7 @@ function Contact() {
 
 			<main className='flex flex-col justify-center items-center'>
 				<div className='w-full flex flex-col items-center'>
-					<h3 className='my-4 group-hover:text-sky-700'>My Socials</h3>
+					<h3 className='mt-4 group-hover:text-sky-700'>My Socials</h3>
 					<div className='flex item-center justify-between w-3/5 sm:w-1/2 max-w-lg py-4 px-8 rounded-lg shadow-lg hover:scale-105 ease-in duration-200'>
 						<a
 							className='hover:bg-slate-300 rounded-full'

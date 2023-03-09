@@ -27,7 +27,7 @@ export default function Home() {
 							<Image
 								src={explosion}
 								alt='nuclear bomb explosion'
-								width={900}
+								width={1000}
 								className='mt-4'
 							/>
 							<figcaption className='mt-2 text-center italic'>
