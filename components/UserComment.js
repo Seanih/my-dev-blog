@@ -98,7 +98,9 @@ function UserComment({
 							required
 						/>
 					) : (
-						<div className='bg-white rounded-xl p-4'>{comment_text}</div>
+						<div className='bg-white border border-black/40 rounded-xl p-4'>
+							{comment_text}
+						</div>
 					)}
 					{/* EDIT & DELETE buttons logic */}
 					{userEmail === email && (
@@ -130,7 +132,7 @@ function UserComment({
 										edit
 									</button>
 									<button
-										className='border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-700 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+										className='border border-black px-4 rounded-md bg-red-700 text-white hover:text-black hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
 										type='button'
 										onClick={() => setShowDeleteModal(true)}
 									>

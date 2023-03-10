@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import Head from 'next/head';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { useSession } from 'next-auth/react';
 
 function Contact() {
 	const [name, setName] = useState('');
@@ -10,6 +11,7 @@ function Contact() {
 	const [subject, setSubject] = useState('');
 	const [message, setMessage] = useState('');
 
+	const { data: session } = useSession();
 	const formRef = useRef();
 
 	const handleNameChange = e => {
@@ -51,6 +53,13 @@ function Contact() {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => {
+		if (session) {
+			setName(session.user.name);
+			setEmail(session.user.email);
+		}
+	}, [session]);
 
 	return (
 		<div className='relative top-20'>
@@ -113,6 +122,7 @@ function Contact() {
 							id='user_name'
 							name='user_name'
 							value={name}
+							placeholder='e.g., Michael Jackson'
 							onChange={handleNameChange}
 							required
 						/>
