@@ -14,19 +14,6 @@ function Contact() {
 	const { data: session } = useSession();
 	const formRef = useRef();
 
-	const handleNameChange = e => {
-		setName(e.target.value);
-	};
-	const handleEmailChange = e => {
-		setEmail(e.target.value);
-	};
-	const handleSubjectChange = e => {
-		setSubject(e.target.value);
-	};
-	const handleMessageChange = e => {
-		setMessage(e.target.value);
-	};
-
 	const handleClearForm = () => {
 		setName('');
 		setEmail('');
@@ -123,7 +110,7 @@ function Contact() {
 							name='user_name'
 							value={name}
 							placeholder='e.g., Michael Jackson'
-							onChange={handleNameChange}
+							onChange={e => setName(e.target.value)}
 							required
 						/>
 					</div>
@@ -137,7 +124,8 @@ function Contact() {
 							id='user_email'
 							name='user_email'
 							value={email}
-							onChange={handleEmailChange}
+							placeholder='person@gmail.com'
+							onChange={e => setEmail(e.target.value)}
 							required
 						/>
 					</div>
@@ -151,7 +139,8 @@ function Contact() {
 							id='user_subject'
 							name='user_subject'
 							value={subject}
-							onChange={handleSubjectChange}
+							placeholder='Greetings'
+							onChange={e => setSubject(e.target.value)}
 							required
 						/>
 					</div>
@@ -166,7 +155,7 @@ function Contact() {
 							value={message}
 							cols={60}
 							rows={5}
-							onChange={handleMessageChange}
+							onChange={e => setMessage(e.target.value)}
 							required
 						/>
 					</div>
