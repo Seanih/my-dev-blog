@@ -72,7 +72,7 @@ function UserComment({
 					handleDeleteComment={handleDeleteComment}
 				/>
 			)}
-			<div className='w-[80%] max-w-[800px] m-auto border border-black/40 rounded-xl mb-4'>
+			<div className='w-[80%] max-w-[800px] m-auto border border-black/40 rounded-xl mb-8'>
 				<div className='w-[90%] m-auto py-4'>
 					<div className='flex flex-wrap justify-between items-center w-4/5 m-auto mb-2 text-sm'>
 						<div className='text-sm font-bold mr-4'>
@@ -106,9 +106,9 @@ function UserComment({
 					{userEmail === email && (
 						<div className='flex mt-4'>
 							{isEditingComment ? (
-								<>
+								<div className='grid grid-cols-2 w-4/5 max-w-[20rem]'>
 									<button
-										className='mr-4 border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-700 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+										className='mr-4 border border-black px-4 rounded-md bg-red-600 text-white hover:bg-red-400 hover:text-black hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
 										type='button'
 										onClick={() => setIsEditingComment(false)}
 									>
@@ -121,24 +121,24 @@ function UserComment({
 									>
 										Confirm
 									</button>
-								</>
+								</div>
 							) : (
-								<>
+								<div className='grid grid-cols-2 w-4/5 max-w-[20rem]'>
 									<button
-										className='mr-4 border border-black px-4 rounded-md bg-sky-700 text-white hover:bg-sky-600 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+										className='mr-4 border border-black px-4 rounded-md bg-sky-600 text-white hover:bg-sky-500 hover:text-black hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
 										type='button'
 										onClick={() => setIsEditingComment(true)}
 									>
 										edit
 									</button>
 									<button
-										className='border border-black px-4 rounded-md bg-red-700 text-white hover:text-black hover:bg-red-500 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
+										className='border border-black px-4 rounded-md bg-red-600 text-white hover:text-black hover:bg-red-400 hover:scale-105 hover:font-semibold hover:cursor-pointer ease-in duration-100'
 										type='button'
 										onClick={() => setShowDeleteModal(true)}
 									>
 										delete
 									</button>
-								</>
+								</div>
 							)}
 						</div>
 					)}

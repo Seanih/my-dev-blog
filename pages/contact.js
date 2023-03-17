@@ -25,19 +25,17 @@ function Contact() {
 		e.preventDefault();
 
 		try {
-			let result = await emailjs.sendForm(
+			await emailjs.sendForm(
 				process.env.NEXT_PUBLIC_SERVICE_ID,
 				process.env.NEXT_PUBLIC_TEMPLATE_ID,
 				formRef.current,
 				process.env.NEXT_PUBLIC_PUBLIC_KEY
 			);
 
-			console.log(result?.text);
-
 			handleClearForm();
 			alert('Message sent successfully!');
 		} catch (error) {
-			console.error(error);
+			alert('An error occured. Please try again.');
 		}
 	};
 
