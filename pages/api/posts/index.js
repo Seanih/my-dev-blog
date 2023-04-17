@@ -1,8 +1,9 @@
 import { createPost, getAllPosts } from '../../../controller/db_interactions';
 import { getServerSession } from 'next-auth/next';
+import { AuthOptions } from 'next-auth';
 
 export default async function handler(req, res) {
-	const { session } = getServerSession(req, res);
+	const { session } = getServerSession(req, res, AuthOptions);
 
 	if (req.method === 'GET') {
 		return getAllPosts(res);
