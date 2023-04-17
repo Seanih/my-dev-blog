@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useState } from 'react';
 import { marked } from 'marked';
 import { motion } from 'framer-motion';
 import UserComment from '../../components/UserComment';

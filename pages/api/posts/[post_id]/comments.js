@@ -4,21 +4,42 @@ import {
 	getPostComments,
 	modifyComment,
 } from '../../../../controller/db_interactions';
+import { getServerSession } from 'next-auth';
 
 export default async function handler(req, res) {
+	const { session } = getServerSession(req, res);
+
 	if (req.method === 'GET') {
 		return getPostComments(req, res);
 	}
 
 	if (req.method === 'POST') {
-		return addCommentToBlogPost(req, res);
+		if (session) {
+			return addCommentToBlogPost(req, res);
+		} else {
+			res
+				.status(401)
+				.json({ error: "You're not authorized to make this request" });
+		}
 	}
 
 	if (req.method === 'PATCH') {
-		return modifyComment(req, res);
+		if (session) {
+			return modifyComment(req, res);
+		} else {
+			res
+				.status(401)
+				.json({ error: "You're not authorized to make this request" });
+		}
 	}
 
 	if (req.method === 'DELETE') {
-		return deleteComment(req, res);
+		if (session) {
+			return deleteComment(req, res);
+		} else {
+			res
+				.status(401)
+				.json({ error: "You're not authorized to make this request" });
+		}
 	}
 }
