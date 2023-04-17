@@ -1,9 +1,9 @@
 import { createPost, getAllPosts } from '../../../controller/db_interactions';
-import { getServerSession } from 'next-auth/next';
+import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(req, res) {
-	const { session } = await getServerSession(req, res, authOptions);
+	const { session } = await unstable_getServerSession(req, res, authOptions);
 
 	if (req.method === 'GET') {
 		return getAllPosts(res);
