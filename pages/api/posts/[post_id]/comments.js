@@ -5,9 +5,10 @@ import {
 	modifyComment,
 } from '../../../../controller/db_interactions';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(req, res) {
-	const { session } = getServerSession(req, res);
+	const { session } = await getServerSession(req, res, authOptions);
 
 	if (req.method === 'GET') {
 		return getPostComments(req, res);

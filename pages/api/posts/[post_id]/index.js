@@ -4,9 +4,10 @@ import {
 	modifyPost,
 } from '../../../../controller/db_interactions';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(req, res) {
-	const { session } = getServerSession(req, res);
+	const { session } = await getServerSession(req, res, authOptions);
 
 	if (req.method === 'GET') {
 		return getSpecificPost(req, res);
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
 	}
 
 	if (req.method === 'DELETE') {
-		if (session.user.email === NEXT_PUBLIC_ADMIN_EMAIL) {
+		if (session) {
 			return deletePost(req, res);
 		} else {
 			res
