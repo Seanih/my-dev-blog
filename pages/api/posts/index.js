@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	}
 
 	if (req.method === 'POST') {
-		if (session.user.email === NEXT_PUBLIC_ADMIN_EMAIL) {
+		if (session) {
 			return createPost(req, res);
 		} else {
 			res

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 	}
 
 	if (req.method === 'PATCH') {
-		if (session.user.email === NEXT_PUBLIC_ADMIN_EMAIL) {
+		if (session) {
 			return modifyPost(req, res);
 		} else {
 			res
