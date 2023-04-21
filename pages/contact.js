@@ -57,34 +57,34 @@ function Contact() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='flex flex-col justify-center items-center'>
-				<div className='w-full flex flex-col items-center'>
+			<main className='flex flex-col items-center justify-center'>
+				<div className='flex flex-col items-center w-full'>
 					<h3 className='mt-4 group-hover:text-sky-700'>My Socials</h3>
-					<div className='flex item-center justify-between w-3/5 sm:w-1/2 max-w-lg py-4 px-8 rounded-lg shadow-lg hover:scale-105 ease-in duration-200'>
+					<div className='flex justify-between w-3/5 max-w-lg px-8 py-4 duration-200 ease-in rounded-lg shadow-lg item-center sm:w-1/2 hover:scale-105'>
 						<a
-							className='hover:bg-slate-300 rounded-full'
+							className='rounded-full hover:bg-slate-300'
 							href='https://www.linkedin.com/in/sean-anih-86a425268/'
 							target='_blank'
 						>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+							<div className='p-3 duration-100 ease-in rounded-full shadow-lg cursor-pointer shadow-gray-400 hover:scale-110'>
 								<FaLinkedinIn />
 							</div>
 						</a>
 						<a
-							className='hover:bg-slate-300 rounded-full'
+							className='rounded-full hover:bg-slate-300'
 							href='https://twitter.com/fullstack_sean'
 							target='_blank'
 						>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+							<div className='p-3 duration-100 ease-in rounded-full shadow-lg cursor-pointer shadow-gray-400 hover:scale-110'>
 								<FaTwitter />
 							</div>
 						</a>
 						<a
-							className='hover:bg-slate-300 rounded-full'
+							className='rounded-full hover:bg-slate-300'
 							href='https://github.com/Seanih'
 							target='_blank'
 						>
-							<div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-100'>
+							<div className='p-3 duration-100 ease-in rounded-full shadow-lg cursor-pointer shadow-gray-400 hover:scale-110'>
 								<FaGithub />
 							</div>
 						</a>
@@ -92,11 +92,11 @@ function Contact() {
 				</div>
 
 				<form
-					className='flex flex-col mt-8 w-4/5 sm:w-3/4 max-w-3xl'
+					className='flex flex-col w-4/5 max-w-3xl mt-8 sm:w-3/4'
 					ref={formRef}
 					onSubmit={handleSendMessage}
 				>
-					<h3 className='text-center mt-4'>Send Me A Message</h3>
+					<h3 className='mt-4 text-center'>Send Me A Message</h3>
 					<div className='mb-4'>
 						<label className='block mb-1' htmlFor='user_name'>
 							Name:{' '}
@@ -158,13 +158,13 @@ function Contact() {
 						/>
 					</div>
 					<button
-						className='border border-black py-4 mt-4 rounded-lg hover:bg-green-600 hover:text-white duration-100'
+						className='py-4 mt-4 duration-100 border border-black rounded-lg hover:bg-green-600 hover:text-white'
 						type='submit'
 					>
 						Send Message
 					</button>
 					<button
-						className='border border-black py-4 mt-4 rounded-lg bg-red-300 hover:bg-red-500 hover:text-white duration-100'
+						className='py-4 mt-4 duration-100 bg-red-300 border border-black rounded-lg hover:bg-red-500 hover:text-white'
 						type='reset'
 						onClick={handleClearForm}
 					>

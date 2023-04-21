@@ -14,7 +14,7 @@ function About() {
 			</Head>
 			<main className='flex flex-col justify-center items-center max-w-[1200px] m-auto'>
 				<div className='w-3/4'>
-					<h1 className='text-center my-8'>About Me</h1>
+					<h1 className='my-8 text-center'>About Me</h1>
 					<section id='introduction'>
 						<p style={{ fontSize: '0.9rem' }}>
 							<i>
@@ -33,7 +33,7 @@ function About() {
 						</p>
 					</section>
 					<section id='code_history'>
-						<h3 className='text-center mb-4'>My History With Code</h3>
+						<h3 className='mb-4 text-center'>My History With Code</h3>
 						<p>
 							My interest in programming started summer of 2019, and it all
 							stemmed from researching more valuable skills I could learn that
@@ -68,7 +68,7 @@ function About() {
 						</p>
 					</section>
 					<section id='failures'>
-						<h3 className='text-center mb-4'>My Failures</h3>
+						<h3 className='mb-4 text-center'>My Failures</h3>
 						<p>
 							I got nothing but rejections and silence the few months I was
 							applying, and the closest I got to anything meaningful was an
@@ -115,7 +115,7 @@ function About() {
 						</p>
 					</section>
 					<section id='turning_point'>
-						<h3 className='text-center mb-4'>My Turning Point</h3>
+						<h3 className='mb-4 text-center'>My Turning Point</h3>
 						<p>
 							In June of 2022, I swore to myself that I would learn blockchain
 							development. I was exposed to the technology when I started

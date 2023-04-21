@@ -56,7 +56,7 @@ function Posts() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='flex flex-col justify-center items-center'>
+			<main className='flex flex-col items-center justify-center'>
 				<h1 className='my-8'>Blog Posts</h1>
 				{blogPosts.length < 1 ? (
 					<p>no blog posts</p>

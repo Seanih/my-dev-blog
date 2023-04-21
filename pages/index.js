@@ -15,7 +15,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='flex flex-col justify-center items-center'>
+			<main className='flex flex-col items-center justify-center'>
 				<section>
 					<figure className='flex flex-col items-center text-sm'>
 						<motion.div
@@ -30,7 +30,7 @@ export default function Home() {
 								width={1000}
 								className='mt-4'
 							/>
-							<figcaption className='mt-2 text-center italic'>
+							<figcaption className='mt-2 italic text-center'>
 								&quot;This is your brain after you finally understand a concept
 								you&apos;ve been struggling with...&quot; ~ Me
 							</figcaption>
@@ -103,7 +103,7 @@ export default function Home() {
 								skills while also being able to help people who might be
 								experiencing what I went through. This blog will contain:
 							</p>
-							<ul className='list-disc ml-8 mb-4'>
+							<ul className='mb-4 ml-8 list-disc'>
 								<li>personal stories related to coding</li>
 								<li>
 									coding-related concepts & topics that I find interesting or

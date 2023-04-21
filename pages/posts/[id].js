@@ -43,7 +43,7 @@ function PostID({ post, comments }) {
 	const formattedDate = date.split(',')[0];
 
 	return (
-		<div className='relative top-20 m-auto'>
+		<div className='relative m-auto top-20'>
 			<Head>
 				<title>Code Chronicles | Blog Post</title>
 				<meta name='description' content='A blog post for Code Chronicles' />
@@ -59,7 +59,7 @@ function PostID({ post, comments }) {
 						viewport={{ once: true }}
 					>
 						<h1 className='pt-8 text-center'>{post.title}</h1>
-						<div className='text-center mt-2 mb-8 italic text-sm'>
+						<div className='mt-2 mb-8 text-sm italic text-center'>
 							<span className='mr-2'>Posted:</span>
 							{formattedDate}
 						</div>
@@ -81,7 +81,7 @@ function PostID({ post, comments }) {
 					<AddComment postID={post.id} status={status} session={session} />
 
 					<div className='mt-8'>
-						<h3 className='text-center mb-4'>Comments</h3>
+						<h3 className='mb-4 text-center'>Comments</h3>
 						{comments.length < 1 ? (
 							<p className='italic text-center'>
 								No comments have been made yet
