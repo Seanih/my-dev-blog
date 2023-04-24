@@ -28,19 +28,19 @@ export const getAllPosts = async res => {
 };
 
 export const createPost = async (req, res) => {
+	const poolClient = await pool.connect();
 	try {
 		const { title, post_content } = req.body;
 		const sqlQuery = `INSERT INTO posts (title, post_content) VALUES ($1, $2)`;
 		const values = [title, post_content];
 
-		await client.connect();
-		await client.query(sqlQuery, values);
+		await poolClient.query(sqlQuery, values);
+
+		poolClient.release();
 
 		res.status(201).json({ success: 'blog entry was added!' });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
-	} finally {
-		client.end();
 	}
 };
 
@@ -60,6 +60,8 @@ export const getSpecificPost = async (req, res) => {
 };
 
 export const modifyPost = async (req, res) => {
+	const poolClient = await pool.connect();
+
 	const queryValues = [
 		req.query.post_id,
 		req.body.title,
@@ -70,15 +72,13 @@ export const modifyPost = async (req, res) => {
 		'UPDATE posts SET title = $2, post_content = $3 WHERE id = $1';
 
 	try {
-		await client.connect();
-		await client.query(sqlQuery, queryValues);
+		await poolClient.query(sqlQuery, queryValues);
+
+		poolClient.release();
 
 		res.status(200).json({ success: 'you made the update!' });
 	} catch (error) {
-		console.error(error.message);
 		res.status(400).json({ error: error.message });
-	} finally {
-		client.end();
 	}
 };
 
