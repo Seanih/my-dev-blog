@@ -58,7 +58,7 @@ function PostID({ post, comments }) {
 						transition={{ duration: 0.3 }}
 						viewport={{ once: true }}
 					>
-						<h1 className='pt-8 text-center'>{post.title}</h1>
+						<h1 className='pt-8 mx-4 text-center'>{post.title}</h1>
 						<div className='mt-2 mb-8 text-sm italic text-center'>
 							<span className='mr-2'>Posted:</span>
 							{formattedDate}
