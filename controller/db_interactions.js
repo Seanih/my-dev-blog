@@ -1,4 +1,4 @@
-import { Client, Pool } from 'pg';
+import { Pool } from 'pg';
 
 export const aws_db_credentials = {
 	host: process.env.AWS_DB_HOST,
@@ -7,8 +7,6 @@ export const aws_db_credentials = {
 	user: process.env.AWS_DB_USER,
 	password: process.env.AWS_DB_PASSWORD,
 };
-
-const client = new Client(aws_db_credentials);
 
 const pool = new Pool(aws_db_credentials);
 
